@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://ca43o2wjsp5ir"]
+[gd_scene load_steps=9 format=3 uid="uid://ca43o2wjsp5ir"]
 
+[ext_resource type="Script" uid="uid://dookmqcj73c0d" path="res://scripts/Chicken.cs" id="1_1yv3s"]
 [ext_resource type="Texture2D" uid="uid://dgdgsace4cv3n" path="res://assets/ChickenFly-Sheet.png" id="1_8lku0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1yv3s"]
@@ -46,6 +47,7 @@ animations = [{
 }]
 
 [node name="Chicken" type="CharacterBody2D"]
+script = ExtResource("1_1yv3s")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pep2a")
