@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=4 uid="uid://cl4brflb83e4f"]
+[gd_scene load_steps=6 format=4 uid="uid://cl4brflb83e4f"]
 
+[ext_resource type="Script" uid="uid://kul01ebtd3gs" path="res://scripts/Floor.cs" id="1_kuqtn"]
 [ext_resource type="Texture2D" uid="uid://bgmymjaw1mfkm" path="res://assets/TileStyle4.png" id="1_ukw5w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kuqtn"]
@@ -63,6 +64,7 @@ sources/0 = SubResource("TileSetAtlasSource_kuqtn")
 size = Vector2(448, 32.75)
 
 [node name="Floor" type="Area2D"]
+script = ExtResource("1_kuqtn")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AADy//3/AAACAAEAAADz//3/AAACAAEAAAD0//3/AAACAAEAAAD1//3/AAACAAEAAAD2//3/AAACAAEAAAD3//3/AAACAAEAAAD4//3/AAACAAEAAAD5//3/AAACAAEAAAD6//3/AAACAAEAAAD7//3/AAACAAEAAAD8//3/AAACAAEAAAD9//3/AAACAAEAAAD+//3/AAACAAEAAAD///3/AAACAAEAAAAAAP3/AAACAAEAAAABAP3/AAACAAEAAAACAP3/AAACAAEAAAADAP3/AAACAAEAAAAEAP3/AAACAAEAAAAFAP3/AAACAAEAAAAGAP3/AAACAAEAAAAHAP3/AAACAAEAAAAIAP3/AAACAAEAAAAJAP3/AAACAAEAAAAKAP3/AAACAAEAAAALAP3/AAACAAEAAAAMAP3/AAACAAEAAAANAP3/AAACAAEAAADy//7/AAACAAIAAADz//7/AAACAAIAAAD0//7/AAACAAIAAAD1//7/AAACAAIAAAD2//7/AAACAAIAAAD3//7/AAACAAIAAAD4//7/AAACAAIAAAD5//7/AAACAAIAAAD6//7/AAACAAIAAAD7//7/AAACAAIAAAD8//7/AAACAAIAAAD9//7/AAACAAIAAAD+//7/AAACAAIAAAD///7/AAACAAIAAAAAAP7/AAACAAIAAAABAP7/AAACAAIAAAACAP7/AAACAAIAAAADAP7/AAACAAIAAAAEAP7/AAACAAIAAAAFAP7/AAACAAIAAAAGAP7/AAACAAIAAAAHAP7/AAACAAIAAAAIAP7/AAACAAIAAAAJAP7/AAACAAIAAAAKAP7/AAACAAIAAAALAP7/AAACAAIAAAAMAP7/AAACAAIAAAANAP7/AAACAAIAAAA=")
@@ -71,3 +73,5 @@ tile_set = SubResource("TileSet_whr1e")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -31.375)
 shape = SubResource("RectangleShape2D_3lc0u")
+
+[connection signal="body_entered" from="." to="." method="OnFloorBodyEntered"]
