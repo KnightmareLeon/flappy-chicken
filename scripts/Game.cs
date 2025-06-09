@@ -9,7 +9,7 @@ public partial class Game : Node2D
         if ((state == State.START | state == State.END) && Input.IsActionJustPressed("start"))
         {
             Chicken chicken = (Chicken) GetNode("Chicken");
-            chicken.Position = new Vector2(256, 256);
+            chicken.Position = new Vector2(384, 384);
             chicken.Rotate(chicken.Tilt);
             chicken.Tilt = 0f;
             state = State.PLAY;

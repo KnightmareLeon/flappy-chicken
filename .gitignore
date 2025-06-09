@@ -1,6 +1,5 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
-
-# Ignore UID files
 *.uid
+*.import
