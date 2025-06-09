@@ -5,7 +5,7 @@ public partial class Chicken : CharacterBody2D
 	private int Speed { get; set; } = 200;
 	private int FlapTimer = 0;
 
-	private float Tilt = 0f;
+	public float Tilt { get; set; } = 0f;
 	private const float TILT_DEGREE = 0.0872665f;
 
 	private Vector2 FallDirection { get; set; } = new Vector2(0, 1);
