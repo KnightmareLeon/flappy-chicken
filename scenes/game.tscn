@@ -18,5 +18,5 @@ position = Vector2(384, 384)
 scale = Vector2(2, 2)
 
 [node name="Ground" parent="." instance=ExtResource("3_lnu2h")]
-position = Vector2(384, 770)
+position = Vector2(449, 770)
 scale = Vector2(2, 2)

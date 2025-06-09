@@ -9,7 +9,19 @@ public partial class Ground : Area2D
 
     public override void _Process(double delta)
     {
-        base._Process(delta);
+        if (Game.state != State.END)
+        {
+            base._Process(delta);
+            Vector2 pos = Position;
+            pos.X -= 4;
+            if (pos.X < 354)
+            {
+                pos.X = 449;
+            }
+            Position = pos;
+        }
+        
+
     }
 
 }
