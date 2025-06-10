@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://csn0mpivmpkqq"]
+
+[ext_resource type="Texture2D" uid="uid://cr3ibsmpvs5en" path="res://assets/pipes.png" id="1_8x3ej"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_832ky"]
+size = Vector2(32, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8x3ej"]
+size = Vector2(32, 47.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_arpqm"]
+atlas = ExtResource("1_8x3ej")
+region = Rect2(64.1222, -0.188255, 32.5959, 48.3682)
+
+[node name="Pipe" type="Area2D"]
+
+[node name="UpperCollisionArea" type="CollisionShape2D" parent="."]
+position = Vector2(0, -194)
+shape = SubResource("RectangleShape2D_832ky")
+
+[node name="LowerCollisionArea" type="CollisionShape2D" parent="."]
+position = Vector2(0, -24.25)
+shape = SubResource("RectangleShape2D_8x3ej")
+debug_color = Color(0.998937, 0, 0.128371, 0.42)
+
+[node name="UpperPipeSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -194)
+rotation = 3.14159
+texture = SubResource("AtlasTexture_arpqm")
+
+[node name="LowerPipeSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -24.5)
+scale = Vector2(1, 1.02083)
+texture = SubResource("AtlasTexture_arpqm")

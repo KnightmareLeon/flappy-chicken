@@ -14,9 +14,9 @@ public partial class Ground : Area2D
             base._Process(delta);
             Vector2 pos = Position;
             pos.X -= 4;
-            if (pos.X < 354)
+            if (pos.X < 353)
             {
-                pos.X = 449;
+                pos.X = 448;
             }
             Position = pos;
         }
