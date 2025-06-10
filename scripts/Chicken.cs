@@ -2,14 +2,12 @@ using Godot;
 
 public partial class Chicken : CharacterBody2D
 {
-	private int Speed { get; set; } = 200;
+	[Export]
+	private int Speed { get; set; } = 300;
 	private int FlapTimer = 0;
 
 	public float Tilt { get; set; } = 0f;
 	private const float TILT_DEGREE = 0.0872665f;
-
-	private Vector2 FallDirection { get; set; } = new Vector2(0, 1);
-	private Vector2 FlapDirection { get; set; } = new Vector2(0,-1);
 	
 	public override void _PhysicsProcess(double delta)
 	{
@@ -18,7 +16,7 @@ public partial class Chicken : CharacterBody2D
 			if (Input.IsActionJustPressed("flap")) { FlapTimer = 10; }
 			if (FlapTimer-- > 0)
 			{
-				Velocity = FlapDirection * Speed * 3;
+				Velocity = Vector2.Up * Speed * 3;
 				if (Tilt < 0.785398f) // 45 degrees
 				{
 					Rotate(-TILT_DEGREE * 3);
@@ -27,7 +25,7 @@ public partial class Chicken : CharacterBody2D
 			}
 			else
 			{
-				Velocity = FallDirection * Speed;
+				Velocity = Vector2.Down * Speed;
 				if (Tilt > -1.5708f) // 90 degrees
 				{
 					Rotate(TILT_DEGREE);
