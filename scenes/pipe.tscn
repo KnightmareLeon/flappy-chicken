@@ -5,40 +5,41 @@
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8x3ej"]
 texture = ExtResource("1_8x3ej")
+4:0/next_alternative_id = 3
 4:0/0 = 0
 5:0/0 = 0
-4:1/0 = 0
 5:1/0 = 0
 4:2/0 = 0
 5:2/0 = 0
+4:1/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_arpqm"]
 sources/0 = SubResource("TileSetAtlasSource_8x3ej")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_832ky"]
-size = Vector2(32, 48)
+size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8x3ej"]
-size = Vector2(32, 47.75)
+size = Vector2(32, 32)
 
 [node name="Pipe" type="Area2D"]
 script = ExtResource("1_arpqm")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 5, 0, 2, 0, 0, 0, 255, 255, 255, 255, 0, 0, 4, 0, 2, 0, 0, 0)
+[node name="UpperPipeTileMap" type="TileMapLayer" parent="."]
+position = Vector2(0, -224)
+rotation = -3.14159
+tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 5, 0, 2, 0, 0, 0, 255, 255, 255, 255, 0, 0, 4, 0, 2, 0, 0, 0, 255, 255, 254, 255, 0, 0, 4, 0, 1, 0, 0, 0, 0, 0, 254, 255, 0, 0, 5, 0, 1, 0, 0, 0)
 tile_set = SubResource("TileSet_arpqm")
 
-[node name="TileMapLayer2" type="TileMapLayer" parent="."]
-position = Vector2(0, -224)
-rotation = 3.14159
-tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 5, 0, 2, 0, 0, 0, 255, 255, 255, 255, 0, 0, 4, 0, 2, 0, 0, 0)
+[node name="LowerPipeTileMap" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 5, 0, 2, 0, 0, 0, 255, 255, 255, 255, 0, 0, 4, 0, 2, 0, 0, 0, 255, 255, 254, 255, 0, 0, 4, 0, 1, 0, 0, 0, 0, 0, 254, 255, 0, 0, 5, 0, 1, 0, 0, 0)
 tile_set = SubResource("TileSet_arpqm")
 
 [node name="UpperCollisionArea" type="CollisionShape2D" parent="."]
-position = Vector2(0, -200)
+position = Vector2(0, -208)
 shape = SubResource("RectangleShape2D_832ky")
 
 [node name="LowerCollisionArea" type="CollisionShape2D" parent="."]
-position = Vector2(0, -23.875)
+position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_8x3ej")
 debug_color = Color(0.998937, 0, 0.128371, 0.42)

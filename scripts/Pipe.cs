@@ -10,6 +10,10 @@ public partial class Pipe : Area2D
             Vector2 pos = Position;
             pos.X -= 4;
             Position = pos;
+            if (pos.X <= -48)
+            {
+                QueueFree();
+            }
         }
 
 
