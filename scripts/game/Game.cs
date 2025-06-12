@@ -2,11 +2,22 @@ using Godot;
 
 public partial class Game : Node2D
 {
-    public static State state = State.START;
-    private int pipeGenerationCD = 300;
+    [Export]
+    public int pipeGenerationStart = 300;
+    [Export]
+    public int pipeGenerationInterval = 80;
+    public StateMachine StateMachine;
+    public Chicken Chicken;
+	public override void _Ready()
+    {
+        StateMachine = (StateMachine)GetNode<Node>("StateMachine");
+        Chicken = (Chicken)GetNode<CharacterBody2D>("Chicken");
+        StateMachine.Initialize(this);
+    }
     public override void _Process(double delta)
     {
-        if ((state == State.START | state == State.END) && Input.IsActionJustPressed("start"))
+        /*
+        if ((gameState == GameState.START | gameState == GameState.END) && Input.IsActionJustPressed("start"))
         {
             Chicken chicken = (Chicken)GetNode("Chicken");
 
@@ -15,10 +26,10 @@ public partial class Game : Node2D
             chicken.Tilt = 0f;
 
             pipeGenerationCD = 300;
-            state = State.PLAY;
+            gameState = GameState.PLAY;
         }
 
-        if (state == State.PLAY)
+        if (gameState == GameState.PLAY)
         {
             if (--pipeGenerationCD == 0)
             {
@@ -27,9 +38,17 @@ public partial class Game : Node2D
             }
         }
         base._Process(delta);
+        */
+        StateMachine.ProcessFrame(delta);
     }
 
-    private void GeneratePipe()
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        StateMachine.ProcessInput(@event);
+    }
+
+
+    public void GeneratePipe()
     {
         PackedScene pipeScene = GD.Load<PackedScene>("res://scenes/pipe.tscn");
         Pipe pipe = (Pipe)pipeScene.Instantiate();

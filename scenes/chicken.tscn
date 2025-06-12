@@ -1,7 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ca43o2wjsp5ir"]
+[gd_scene load_steps=13 format=3 uid="uid://ca43o2wjsp5ir"]
 
-[ext_resource type="Script" uid="uid://b4y2e3frxq8e6" path="res://scripts/Chicken.cs" id="1_1yv3s"]
+[ext_resource type="Script" uid="uid://b4y2e3frxq8e6" path="res://scripts/chicken/Chicken.cs" id="1_1yv3s"]
 [ext_resource type="Texture2D" uid="uid://doftdlivqv2md" path="res://assets/chicken_flapping.png" id="2_1yv3s"]
+[ext_resource type="Script" uid="uid://4n71cb07o423" path="res://scripts/StateMachine.cs" id="3_nutj5"]
+[ext_resource type="Script" uid="uid://cexg7naxwe25u" path="res://scripts/chicken/states/Default.cs" id="4_rc7ma"]
+[ext_resource type="Script" uid="uid://2tq78oxcscl8" path="res://scripts/chicken/states/Flapping.cs" id="5_0du8g"]
+[ext_resource type="Script" uid="uid://crll5hcmt0aek" path="res://scripts/chicken/states/Falling.cs" id="6_bti8l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nutj5"]
 atlas = ExtResource("2_1yv3s")
@@ -49,10 +53,25 @@ animations = [{
 [node name="Chicken" type="CharacterBody2D"]
 script = ExtResource("1_1yv3s")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Animations" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pep2a")
-autoplay = "default"
-frame_progress = 0.728421
+frame_progress = 0.670792
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-11, -1, -3, -4, 11, -4, 11, -4, 11, 1, 0, 7)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("StartingState")]
+script = ExtResource("3_nutj5")
+StartingState = NodePath("Default")
+
+[node name="Default" type="Node" parent="StateMachine" node_paths=PackedStringArray("FallingState")]
+script = ExtResource("4_rc7ma")
+FallingState = NodePath("../Falling")
+
+[node name="Flapping" type="Node" parent="StateMachine" node_paths=PackedStringArray("FallingState")]
+script = ExtResource("5_0du8g")
+FallingState = NodePath("../Falling")
+
+[node name="Falling" type="Node" parent="StateMachine" node_paths=PackedStringArray("FlappingState")]
+script = ExtResource("6_bti8l")
+FlappingState = NodePath("../Flapping")
