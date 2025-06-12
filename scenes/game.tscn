@@ -9,9 +9,10 @@
 [ext_resource type="Script" uid="uid://ccp46x8ok8nhw" path="res://scripts/game/states/Playing.cs" id="7_gee14"]
 [ext_resource type="Script" uid="uid://cakanl3y523gh" path="res://scripts/game/states/Defeat.cs" id="8_0tnpc"]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("DefeatState")]
 script = ExtResource("1_p57ef")
 pipeGenerationStart = 0
+DefeatState = NodePath("StateMachine/Defeat")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(384, 384)
@@ -37,5 +38,8 @@ PlayingState = NodePath("../Playing")
 [node name="Playing" type="Node" parent="StateMachine"]
 script = ExtResource("7_gee14")
 
-[node name="Defeat" type="Node" parent="StateMachine"]
+[node name="Defeat" type="Node" parent="StateMachine" node_paths=PackedStringArray("StartState")]
 script = ExtResource("8_0tnpc")
+StartState = NodePath("../Start")
+
+[connection signal="body_entered" from="Ground" to="." method="ChickenEnteredGround"]

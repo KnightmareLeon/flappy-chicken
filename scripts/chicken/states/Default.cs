@@ -8,6 +8,8 @@ public partial class Default : State
     {
         Chicken parent = (Chicken)Parent;
         parent.Animations.Play("default");
+        parent.Position = new Vector2(384, 384);
+
     }
     public override State ProcessInput(InputEvent inputEvent)
     {

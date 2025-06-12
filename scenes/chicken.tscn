@@ -1,11 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://ca43o2wjsp5ir"]
+[gd_scene load_steps=19 format=3 uid="uid://ca43o2wjsp5ir"]
 
 [ext_resource type="Script" uid="uid://b4y2e3frxq8e6" path="res://scripts/chicken/Chicken.cs" id="1_1yv3s"]
 [ext_resource type="Texture2D" uid="uid://doftdlivqv2md" path="res://assets/chicken_flapping.png" id="2_1yv3s"]
 [ext_resource type="Script" uid="uid://4n71cb07o423" path="res://scripts/StateMachine.cs" id="3_nutj5"]
+[ext_resource type="Texture2D" uid="uid://dxjmrqic3kd05" path="res://assets/chicken_dead.png" id="3_pep2a"]
 [ext_resource type="Script" uid="uid://cexg7naxwe25u" path="res://scripts/chicken/states/Default.cs" id="4_rc7ma"]
 [ext_resource type="Script" uid="uid://2tq78oxcscl8" path="res://scripts/chicken/states/Flapping.cs" id="5_0du8g"]
 [ext_resource type="Script" uid="uid://crll5hcmt0aek" path="res://scripts/chicken/states/Falling.cs" id="6_bti8l"]
+[ext_resource type="Script" uid="uid://cqlw0kymknnu5" path="res://scripts/chicken/states/Dead.cs" id="8_5sgx4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nutj5"]
 atlas = ExtResource("2_1yv3s")
@@ -26,6 +28,22 @@ region = Rect2(96, 0, 32, 21)
 [sub_resource type="AtlasTexture" id="AtlasTexture_pep2a"]
 atlas = ExtResource("2_1yv3s")
 region = Rect2(128, 0, 32, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sgx4"]
+atlas = ExtResource("3_pep2a")
+region = Rect2(0, 0, 20, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8aah5"]
+atlas = ExtResource("3_pep2a")
+region = Rect2(20, 0, 20, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fwex"]
+atlas = ExtResource("3_pep2a")
+region = Rect2(40, 0, 20, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trwpf"]
+atlas = ExtResource("3_pep2a")
+region = Rect2(60, 0, 20, 21)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pep2a"]
 animations = [{
@@ -48,14 +66,31 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sgx4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8aah5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fwex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trwpf")
+}],
+"loop": false,
+"name": &"dying",
+"speed": 5.0
 }]
 
-[node name="Chicken" type="CharacterBody2D"]
+[node name="Chicken" type="CharacterBody2D" node_paths=PackedStringArray("DeadState")]
 script = ExtResource("1_1yv3s")
+DeadState = NodePath("StateMachine/Dead")
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pep2a")
-frame_progress = 0.670792
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-11, -1, -3, -4, 11, -4, 11, -4, 11, 1, 0, 7)
@@ -75,3 +110,7 @@ FallingState = NodePath("../Falling")
 [node name="Falling" type="Node" parent="StateMachine" node_paths=PackedStringArray("FlappingState")]
 script = ExtResource("6_bti8l")
 FlappingState = NodePath("../Flapping")
+
+[node name="Dead" type="Node" parent="StateMachine" node_paths=PackedStringArray("DefaultState")]
+script = ExtResource("8_5sgx4")
+DefaultState = NodePath("../Default")

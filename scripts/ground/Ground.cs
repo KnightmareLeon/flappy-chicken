@@ -4,11 +4,12 @@ public partial class Ground : Area2D
 {
     public StateMachine StateMachine;
 
-    private void OnGroundBodyEntered(PhysicsBody2D body)
+    [Export]
+    private State StoppedState;
+
+    private void OnBodyEntered(Node2D body)
     {
-        /*
-        Game.gameState = GameState.END;
-        */
+        StateMachine.ChangeState(StoppedState);
     }
 
     public override void _Ready()
@@ -21,5 +22,11 @@ public partial class Ground : Area2D
     {
         StateMachine.ProcessFrame(delta);
     }
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        StateMachine.ProcessInput(@event);
+    }
+
 
 }

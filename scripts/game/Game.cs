@@ -6,13 +6,20 @@ public partial class Game : Node2D
     public int pipeGenerationStart = 300;
     [Export]
     public int pipeGenerationInterval = 80;
+    [Export]
+    private State DefeatState; 
     public StateMachine StateMachine;
     public Chicken Chicken;
-	public override void _Ready()
+
+    private Ground Ground;
+    public override void _Ready()
     {
         StateMachine = (StateMachine)GetNode<Node>("StateMachine");
         Chicken = (Chicken)GetNode<CharacterBody2D>("Chicken");
+        Ground = (Ground)GetNode<Area2D>("Ground");
         StateMachine.Initialize(this);
+
+        Ground.BodyEntered += Chicken.OnEnteringGround;
     }
     public override void _Process(double delta)
     {
@@ -28,16 +35,6 @@ public partial class Game : Node2D
             pipeGenerationCD = 300;
             gameState = GameState.PLAY;
         }
-
-        if (gameState == GameState.PLAY)
-        {
-            if (--pipeGenerationCD == 0)
-            {
-                GeneratePipe();
-                pipeGenerationCD = 80;
-            }
-        }
-        base._Process(delta);
         */
         StateMachine.ProcessFrame(delta);
     }
@@ -55,6 +52,11 @@ public partial class Game : Node2D
         pipe.Position = new Vector2(816, 672);
         pipe.Scale = new Vector2(3, 3);
         AddChild(pipe);
+    }
+
+    private void ChickenEnteredGround(Node2D body)
+    {
+        StateMachine.ChangeState(DefeatState);
     }
 
 }

@@ -9,6 +9,8 @@ public partial class Chicken : CharacterBody2D
 	public float Tilt { get; set; } = 0f;
 	public const float TILT_DEGREE = 0.0872665f;
 
+	[Export]
+	private State DeadState;
 	public AnimatedSprite2D Animations;
 	public StateMachine StateMachine;
 	public override void _Ready()
@@ -19,39 +21,20 @@ public partial class Chicken : CharacterBody2D
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
-    {
-        StateMachine.ProcessInput(@event);
-    }
+	{
+		StateMachine.ProcessInput(@event);
+	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		/*
-		if (Game.gameState == GameState.PLAY)
-		{
-			if (Input.IsActionJustPressed("flap")) { FlapTimer = 10; }
-			if (FlapTimer-- > 0)
-			{
-				Velocity = Vector2.Up * Speed * 3;
-				if (Tilt < 0.785398f) // 45 degrees
-				{
-					Rotate(-TILT_DEGREE * 3);
-					Tilt += TILT_DEGREE * 3;
-				}
-			}
-			else
-			{
-				Velocity = Vector2.Down * Speed;
-				if (Tilt > -1.5708f) // 90 degrees
-				{
-					Rotate(TILT_DEGREE);
-					Tilt -= TILT_DEGREE;
-				}
-			}
-			MoveAndSlide();
-		}
-		*/
+
 		StateMachine.ProcessPhysics(delta);
 
+	}
+
+	public void OnEnteringGround(Node2D body)
+	{
+		StateMachine.ChangeState(DeadState);
 	}
 
 }
