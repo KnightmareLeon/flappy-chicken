@@ -46,7 +46,7 @@ shape = SubResource("RectangleShape2D_832ky")
 [node name="LowerCollisionArea" type="CollisionShape2D" parent="."]
 position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_8x3ej")
-debug_color = Color(0.998937, 0, 0.128371, 0.42)
+debug_color = Color(0.293965, 0.497105, 1, 0.42)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("StartingState")]
 script = ExtResource("3_4ybk5")
