@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://csn0mpivmpkqq"]
+[gd_scene load_steps=11 format=3 uid="uid://csn0mpivmpkqq"]
 
 [ext_resource type="Texture2D" uid="uid://cr3ibsmpvs5en" path="res://assets/pipes.png" id="1_8x3ej"]
 [ext_resource type="Script" uid="uid://bhfp873gqbdkp" path="res://scripts/pipe/Pipe.cs" id="1_arpqm"]
@@ -25,6 +25,9 @@ size = Vector2(32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8x3ej"]
 size = Vector2(32, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ybk5"]
+size = Vector2(32, 256)
+
 [node name="Pipe" type="Area2D" node_paths=PackedStringArray("StoppedState")]
 script = ExtResource("1_arpqm")
 StoppedState = NodePath("StateMachine/PipeStopped")
@@ -47,6 +50,11 @@ shape = SubResource("RectangleShape2D_832ky")
 position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_8x3ej")
 debug_color = Color(0.293965, 0.497105, 1, 0.42)
+
+[node name="OffScreenCollisionArea" type="CollisionShape2D" parent="."]
+position = Vector2(0, -488)
+shape = SubResource("RectangleShape2D_4ybk5")
+debug_color = Color(0.642812, 0.523488, 0, 0.42)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("StartingState")]
 script = ExtResource("3_4ybk5")
