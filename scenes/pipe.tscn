@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://csn0mpivmpkqq"]
+[gd_scene load_steps=10 format=3 uid="uid://csn0mpivmpkqq"]
 
 [ext_resource type="Texture2D" uid="uid://cr3ibsmpvs5en" path="res://assets/pipes.png" id="1_8x3ej"]
-[ext_resource type="Script" uid="uid://bhfp873gqbdkp" path="res://scripts/Pipe.cs" id="1_arpqm"]
+[ext_resource type="Script" uid="uid://bhfp873gqbdkp" path="res://scripts/pipe/Pipe.cs" id="1_arpqm"]
+[ext_resource type="Script" uid="uid://4n71cb07o423" path="res://scripts/StateMachine.cs" id="3_4ybk5"]
+[ext_resource type="Script" uid="uid://btdet554k0sce" path="res://scripts/pipe/states/PipeMoving.cs" id="4_tdldm"]
+[ext_resource type="Script" uid="uid://lkxewaovvddf" path="res://scripts/pipe/states/PipeStopped.cs" id="5_ss4sx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8x3ej"]
 texture = ExtResource("1_8x3ej")
@@ -22,8 +25,9 @@ size = Vector2(32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8x3ej"]
 size = Vector2(32, 32)
 
-[node name="Pipe" type="Area2D"]
+[node name="Pipe" type="Area2D" node_paths=PackedStringArray("StoppedState")]
 script = ExtResource("1_arpqm")
+StoppedState = NodePath("StateMachine/PipeStopped")
 
 [node name="UpperPipeTileMap" type="TileMapLayer" parent="."]
 position = Vector2(0, -224)
@@ -43,3 +47,13 @@ shape = SubResource("RectangleShape2D_832ky")
 position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_8x3ej")
 debug_color = Color(0.998937, 0, 0.128371, 0.42)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("StartingState")]
+script = ExtResource("3_4ybk5")
+StartingState = NodePath("PipeMoving")
+
+[node name="PipeMoving" type="Node" parent="StateMachine"]
+script = ExtResource("4_tdldm")
+
+[node name="PipeStopped" type="Node" parent="StateMachine"]
+script = ExtResource("5_ss4sx")

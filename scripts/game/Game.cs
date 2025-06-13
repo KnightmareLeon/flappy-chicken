@@ -51,6 +51,7 @@ public partial class Game : Node2D
         Pipe pipe = (Pipe)pipeScene.Instantiate();
         pipe.Position = new Vector2(816, 672);
         pipe.Scale = new Vector2(3, 3);
+        Ground.BodyEntered += pipe.ChickenEnteredGround;
         AddChild(pipe);
     }
 
