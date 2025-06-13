@@ -11,6 +11,8 @@ public partial class Chicken : CharacterBody2D
 
 	[Export]
 	private State DeadState;
+	[Export]
+	private State DeadFallingState;
 	public AnimatedSprite2D Animations;
 	public StateMachine StateMachine;
 	public override void _Ready()
@@ -35,6 +37,11 @@ public partial class Chicken : CharacterBody2D
 	public void OnEnteringGround(Node2D body)
 	{
 		StateMachine.ChangeState(DeadState);
+	}
+
+	public void OnEnteringPipe(Node2D body)
+	{
+		StateMachine.ChangeState(DeadFallingState);
 	}
 
 }

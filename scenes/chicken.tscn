@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ca43o2wjsp5ir"]
+[gd_scene load_steps=21 format=3 uid="uid://ca43o2wjsp5ir"]
 
 [ext_resource type="Script" uid="uid://b4y2e3frxq8e6" path="res://scripts/chicken/Chicken.cs" id="1_1yv3s"]
 [ext_resource type="Texture2D" uid="uid://doftdlivqv2md" path="res://assets/chicken_flapping.png" id="2_1yv3s"]
@@ -8,6 +8,11 @@
 [ext_resource type="Script" uid="uid://2tq78oxcscl8" path="res://scripts/chicken/states/Flapping.cs" id="5_0du8g"]
 [ext_resource type="Script" uid="uid://crll5hcmt0aek" path="res://scripts/chicken/states/Falling.cs" id="6_bti8l"]
 [ext_resource type="Script" uid="uid://cqlw0kymknnu5" path="res://scripts/chicken/states/Dead.cs" id="8_5sgx4"]
+[ext_resource type="Script" uid="uid://co57cs56beare" path="res://scripts/chicken/states/DeadFalling.cs" id="9_8aah5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r70ld"]
+atlas = ExtResource("3_pep2a")
+region = Rect2(0, 0, 20, 21)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nutj5"]
 atlas = ExtResource("2_1yv3s")
@@ -49,6 +54,14 @@ region = Rect2(60, 0, 20, 21)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_r70ld")
+}],
+"loop": false,
+"name": &"dead_falling",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_nutj5")
 }, {
 "duration": 1.0,
@@ -85,12 +98,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Chicken" type="CharacterBody2D" node_paths=PackedStringArray("DeadState")]
+[node name="Chicken" type="CharacterBody2D" node_paths=PackedStringArray("DeadState", "DeadFallingState")]
 script = ExtResource("1_1yv3s")
 DeadState = NodePath("StateMachine/Dead")
+DeadFallingState = NodePath("StateMachine/DeadFalling")
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pep2a")
+animation = &"dead_falling"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-11, -1, -3, -4, 11, -4, 11, -4, 11, 1, 0, 7)
@@ -114,3 +129,6 @@ FlappingState = NodePath("../Flapping")
 [node name="Dead" type="Node" parent="StateMachine" node_paths=PackedStringArray("DefaultState")]
 script = ExtResource("8_5sgx4")
 DefaultState = NodePath("../Default")
+
+[node name="DeadFalling" type="Node" parent="StateMachine"]
+script = ExtResource("9_8aah5")
