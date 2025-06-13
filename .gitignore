@@ -1,5 +1,16 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
-*.uid
-*.import
+export_presets.cfg
+
+# C# build artifacts
+bin/
+obj/
+.mono/
+
+# VS Code specific
+.vscode/        
+
+# OS junk
+.DS_Store
+Thumbs.db
