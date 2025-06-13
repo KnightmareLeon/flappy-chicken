@@ -12,9 +12,9 @@ public partial class Moving : State
     {
         Vector2 pos = ground.Position;
         pos.X -= 4;
-        if (pos.X < 353)
+        if (pos.X <= 224)
         {
-            pos.X = 448;
+            pos.X = 272;
         }
         ground.Position = pos;
         return null;

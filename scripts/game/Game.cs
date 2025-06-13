@@ -49,8 +49,8 @@ public partial class Game : Node2D
     {
         PackedScene pipeScene = GD.Load<PackedScene>("res://scenes/pipe.tscn");
         Pipe pipe = (Pipe)pipeScene.Instantiate();
-        pipe.Position = new Vector2(816, 672);
-        pipe.Scale = new Vector2(3, 3);
+        pipe.Position = new Vector2(800, 720);
+        pipe.Scale = new Vector2(2, 2);
         Ground.BodyEntered += pipe.ChickenEnteredGround;
         AddChild(pipe);
     }
