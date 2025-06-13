@@ -12,6 +12,7 @@
 [node name="Game" type="Node2D" node_paths=PackedStringArray("DefeatState")]
 script = ExtResource("1_p57ef")
 pipeGenerationStart = 0
+pipeGenerationInterval = 100
 DefeatState = NodePath("StateMachine/Defeat")
 
 [node name="Background" type="Sprite2D" parent="."]

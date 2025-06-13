@@ -3,7 +3,7 @@ using Godot;
 public partial class Chicken : CharacterBody2D
 {
 	[Export]
-	public int Speed { get; set; } = 300;
+	public int Speed { get; set; } = 320;
 	public int FlapTimer = 0;
 
 	public float Tilt { get; set; } = 0f;

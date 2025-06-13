@@ -11,7 +11,7 @@ public partial class PipeMoving : State
     public override State ProcessFrame(double delta)
     {
         Vector2 pos = pipe.Position;
-        pos.X -= 4;
+        pos.X -= 3;
         pipe.Position = pos;
         if (pos.X <= -48)
         {

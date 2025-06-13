@@ -6,6 +6,7 @@ public partial class Falling : State
     [Export]
     State FlappingState;
     Chicken chicken;
+    
     public override void Enter()
     {
         chicken = (Chicken)Parent;

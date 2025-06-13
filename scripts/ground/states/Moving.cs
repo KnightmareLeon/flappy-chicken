@@ -11,7 +11,7 @@ public partial class Moving : State
     public override State ProcessFrame(double delta)
     {
         Vector2 pos = ground.Position;
-        pos.X -= 4;
+        pos.X -= 3;
         if (pos.X <= 224)
         {
             pos.X = 272;
