@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://csn0mpivmpkqq"]
+[gd_scene load_steps=12 format=3 uid="uid://csn0mpivmpkqq"]
 
 [ext_resource type="Texture2D" uid="uid://cr3ibsmpvs5en" path="res://assets/pipes.png" id="1_8x3ej"]
 [ext_resource type="Script" uid="uid://bhfp873gqbdkp" path="res://scripts/pipe/Pipe.cs" id="1_arpqm"]
+[ext_resource type="PackedScene" uid="uid://bntnm4eg51mx" path="res://scenes/area_movement_component.tscn" id="2_tdldm"]
 [ext_resource type="Script" uid="uid://4n71cb07o423" path="res://scripts/StateMachine.cs" id="3_4ybk5"]
 [ext_resource type="Script" uid="uid://btdet554k0sce" path="res://scripts/pipe/states/PipeMoving.cs" id="4_tdldm"]
 [ext_resource type="Script" uid="uid://lkxewaovvddf" path="res://scripts/pipe/states/PipeStopped.cs" id="5_ss4sx"]
@@ -32,6 +33,8 @@ size = Vector2(32, 256)
 script = ExtResource("1_arpqm")
 StoppedState = NodePath("StateMachine/PipeStopped")
 
+[node name="AreaMovementComponent" parent="." instance=ExtResource("2_tdldm")]
+
 [node name="UpperPipeTileMap" type="TileMapLayer" parent="."]
 position = Vector2(0, -360)
 rotation = -3.14159
@@ -60,8 +63,9 @@ debug_color = Color(0.642812, 0.523488, 0, 0.42)
 script = ExtResource("3_4ybk5")
 StartingState = NodePath("PipeMoving")
 
-[node name="PipeMoving" type="Node" parent="StateMachine"]
+[node name="PipeMoving" type="Node" parent="StateMachine" node_paths=PackedStringArray("areaMovementComponent")]
 script = ExtResource("4_tdldm")
+areaMovementComponent = NodePath("../../AreaMovementComponent")
 
 [node name="PipeStopped" type="Node" parent="StateMachine"]
 script = ExtResource("5_ss4sx")

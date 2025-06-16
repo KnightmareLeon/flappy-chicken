@@ -3,19 +3,14 @@ using Godot;
 public partial class PipeMoving : State
 {
 
-    Pipe pipe;
-    public override void Enter()
-    {
-        pipe = (Pipe)Parent;
-    }
+    [Export]
+    AreaMovementComponent areaMovementComponent;
     public override State ProcessFrame(double delta)
     {
-        Vector2 pos = pipe.Position;
-        pos.X -= 3;
-        pipe.Position = pos;
-        if (pos.X <= -48)
+        Vector2 position = areaMovementComponent.Move();
+        if (position.X <= -48)
         {
-            pipe.QueueFree();
+            Parent.QueueFree();
         }
         return null;
     }

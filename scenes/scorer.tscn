@@ -1,10 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3cqkv5p67jp5"]
+[gd_scene load_steps=3 format=3 uid="uid://d3cqkv5p67jp5"]
+
+[ext_resource type="PackedScene" uid="uid://bntnm4eg51mx" path="res://scenes/area_movement_component.tscn" id="1_fxg3i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jvlis"]
-size = Vector2(108, 768)
+size = Vector2(30, 768)
 
 [node name="Scorer" type="Area2D"]
 
+[node name="AreaMovementComponent" parent="." instance=ExtResource("1_fxg3i")]
+position = Vector2(120.077, -238.851)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(459, 385)
+position = Vector2(15, -384)
 shape = SubResource("RectangleShape2D_jvlis")

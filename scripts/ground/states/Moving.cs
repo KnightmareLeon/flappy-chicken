@@ -3,20 +3,18 @@ using Godot;
 public partial class Moving : State
 {
 
-    Ground ground;
-    public override void Enter()
-    {
-        ground = (Ground)Parent;
-    }
+    [Export]
+    AreaMovementComponent areaMovementComponent;
+
     public override State ProcessFrame(double delta)
     {
-        Vector2 pos = ground.Position;
-        pos.X -= 3;
-        if (pos.X <= 224)
+        Vector2 position = areaMovementComponent.Move();
+        if (position.X <= 224)
         {
-            pos.X = 272;
+            Ground parent = (Ground)Parent;
+            position.X = 272;
+            parent.Position = position;
         }
-        ground.Position = pos;
         return null;
     }
 }

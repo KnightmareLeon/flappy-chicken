@@ -105,7 +105,6 @@ DeadFallingState = NodePath("StateMachine/DeadFalling")
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pep2a")
-animation = &"dead_falling"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-11, -1, -3, -4, 11, -4, 11, -4, 11, 1, 0, 7)
