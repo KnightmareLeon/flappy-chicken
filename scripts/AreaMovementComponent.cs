@@ -1,5 +1,6 @@
 using Godot;
 
+[GlobalClass]
 public partial class AreaMovementComponent : Node2D
 {
     public Vector2 Move()

@@ -21,26 +21,39 @@ public partial class Game : Node2D
 
         Ground.BodyEntered += Chicken.OnEnteringGround;
     }
-    public override void _Process(double delta)
-    {
-        StateMachine.ProcessFrame(delta);
-    }
 
     public override void _UnhandledInput(InputEvent @event)
     {
         StateMachine.ProcessInput(@event);
     }
-
+    public override void _Process(double delta)
+    {
+        StateMachine.ProcessFrame(delta);
+    }
 
     public void GeneratePipe()
     {
         PackedScene pipeScene = GD.Load<PackedScene>("res://scenes/pipe.tscn");
+        PackedScene scorerScene = GD.Load<PackedScene>("res://scenes/scorer.tscn");
+
         Pipe pipe = (Pipe)pipeScene.Instantiate();
-        pipe.Position = new Vector2(800, 720);
-        pipe.Scale = new Vector2(2, 2);
+        Scorer scorer = (Scorer)scorerScene.Instantiate();
+
+        Vector2 position = new Vector2(800, 720);
+        Vector2 scale = new Vector2(2, 2);
+
+        pipe.Position = position;
+        pipe.Scale = scale;
+
+        scorer.Position = position;
+        pipe.Scale = scale;
+
         Ground.BodyEntered += pipe.ChickenEnteredGround;
+        Ground.BodyEntered += scorer.ChickenEnteredGround;
         pipe.BodyEntered += Chicken.OnEnteringPipe;
+
         AddChild(pipe);
+        AddChild(scorer);
     }
 
     private void ChickenEnteredGround(Node2D body)

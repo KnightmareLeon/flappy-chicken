@@ -1,8 +1,7 @@
 using Godot;
 
-public partial class PipeStopped : State
+public partial class ScorerStopped : State
 {
-
     public override State ProcessInput(InputEvent inputEvent)
     {
         if (Input.IsActionJustPressed("start"))

@@ -1,11 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3cqkv5p67jp5"]
+[gd_scene load_steps=7 format=3 uid="uid://d3cqkv5p67jp5"]
 
+[ext_resource type="Script" uid="uid://bhvmo4ym2i7a8" path="res://scripts/scorer/Scorer.cs" id="1_agqv6"]
 [ext_resource type="PackedScene" uid="uid://bntnm4eg51mx" path="res://scenes/area_movement_component.tscn" id="1_fxg3i"]
+[ext_resource type="Script" uid="uid://4n71cb07o423" path="res://scripts/StateMachine.cs" id="2_2di7l"]
+[ext_resource type="Script" uid="uid://bswxvdsk8vs60" path="res://scripts/scorer/states/ScorerMoving.cs" id="3_fbgk8"]
+[ext_resource type="Script" uid="uid://cs6704518b3bv" path="res://scripts/scorer/states/ScorerStopped.cs" id="5_2qu2f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jvlis"]
 size = Vector2(30, 768)
 
-[node name="Scorer" type="Area2D"]
+[node name="Scorer" type="Area2D" node_paths=PackedStringArray("StoppedState")]
+script = ExtResource("1_agqv6")
+StoppedState = NodePath("StateMachine/ScorerStopped")
 
 [node name="AreaMovementComponent" parent="." instance=ExtResource("1_fxg3i")]
 position = Vector2(120.077, -238.851)
@@ -13,3 +19,18 @@ position = Vector2(120.077, -238.851)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(15, -384)
 shape = SubResource("RectangleShape2D_jvlis")
+debug_color = Color(0.635195, 0.527247, 0, 0.42)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("StartingState")]
+script = ExtResource("2_2di7l")
+StartingState = NodePath("ScorerMoving")
+metadata/_custom_type_script = "uid://4n71cb07o423"
+
+[node name="ScorerMoving" type="Node" parent="StateMachine" node_paths=PackedStringArray("areaMovementComponent")]
+script = ExtResource("3_fbgk8")
+areaMovementComponent = NodePath("../../AreaMovementComponent")
+metadata/_custom_type_script = "uid://ckn8m4mhf8xhv"
+
+[node name="ScorerStopped" type="Node" parent="StateMachine"]
+script = ExtResource("5_2qu2f")
+metadata/_custom_type_script = "uid://ckn8m4mhf8xhv"

@@ -69,7 +69,6 @@ public partial class Pipe : Area2D
         StateMachine.ProcessInput(@event);
     }
 
-
     public void ChickenEnteredGround(Node2D body)
     {
         StateMachine.ChangeState(StoppedState);
