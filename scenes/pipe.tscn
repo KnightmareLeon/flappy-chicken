@@ -29,9 +29,10 @@ size = Vector2(32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ybk5"]
 size = Vector2(32, 256)
 
-[node name="Pipe" type="Area2D" node_paths=PackedStringArray("StoppedState")]
+[node name="Pipe" type="Area2D" node_paths=PackedStringArray("_stateMachine", "stoppedState")]
 script = ExtResource("1_arpqm")
-StoppedState = NodePath("StateMachine/PipeStopped")
+_stateMachine = NodePath("StateMachine")
+stoppedState = NodePath("StateMachine/PipeStopped")
 
 [node name="AreaMovementComponent" parent="." instance=ExtResource("2_tdldm")]
 
@@ -62,6 +63,7 @@ debug_color = Color(0.642812, 0.523488, 0, 0.42)
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("StartingState")]
 script = ExtResource("3_4ybk5")
 StartingState = NodePath("PipeMoving")
+metadata/_custom_type_script = "uid://4n71cb07o423"
 
 [node name="PipeMoving" type="Node" parent="StateMachine" node_paths=PackedStringArray("areaMovementComponent")]
 script = ExtResource("4_tdldm")

@@ -1,31 +1,27 @@
-using Godot;
-
-public partial class Ground : Area2D
+namespace Godot.Game
 {
-    public StateMachine StateMachine;
-
-    [Export]
-    private State StoppedState;
-
-    private void OnBodyEntered(Node2D body)
+    public partial class Ground : Area2D
     {
-        StateMachine.ChangeState(StoppedState);
-    }
+        [Export]
+        private StateMachine _stateMachine;
 
-    public override void _Ready()
-    {
-        StateMachine = (StateMachine)GetNode<Node>("StateMachine");
-        StateMachine.Initialize(this);
-    }
+        [Export]
+        private State stoppedState;
 
-    public override void _UnhandledInput(InputEvent @event)
-    {
-        StateMachine.ProcessInput(@event);
-    }
+        private void OnBodyEntered(Node2D body)
+        {
+            _stateMachine.ChangeState(stoppedState);
+        }
 
-    public override void _Process(double delta)
-    {
-        StateMachine.ProcessFrame(delta);
-    }
+        public override void _UnhandledInput(InputEvent @event)
+        {
+            _stateMachine.ProcessInput(@event);
+        }
 
+        public override void _Process(double delta)
+        {
+            _stateMachine.ProcessFrame(delta);
+        }
+
+    }
 }

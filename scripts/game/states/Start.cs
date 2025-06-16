@@ -1,25 +1,26 @@
-using System;
-using Godot;
-
-public partial class Start : State
+namespace Godot.Game
 {
 
-    [Export]
-    private State PlayingState;
+    public partial class Start : State
+    {
 
-    Game game;
-    public override void Enter()
-    {
-        game = (Game)Parent;
-    }
-    public override State ProcessInput(InputEvent inputEvent)
-    {
-        if (Input.IsActionJustPressed("start"))
+        [Export]
+        private State playingState;
+
+        Game game;
+        public override void Enter()
         {
-            return PlayingState;
+            game = (Game)Parent;
         }
-        return null;
+        public override State ProcessInput(InputEvent inputEvent)
+        {
+            if (Input.IsActionJustPressed("start"))
+            {
+                return playingState;
+            }
+            return null;
+        }
+
+
     }
-
-
 }

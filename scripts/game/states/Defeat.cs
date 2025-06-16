@@ -1,15 +1,16 @@
-using Godot;
-
-public partial class Defeat : State
+namespace Godot.Game
 {
-    [Export]
-    State StartState;
-    public override State ProcessInput(InputEvent inputEvent)
+    public partial class Defeat : State
     {
-        if (Input.IsActionJustPressed("start"))
+        [Export]
+        private State startState;
+        public override State ProcessInput(InputEvent inputEvent)
         {
-            return StartState;
+            if (Input.IsActionJustPressed("start"))
+            {
+                return startState;
+            }
+            return null;
         }
-        return null;
     }
 }

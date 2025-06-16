@@ -98,8 +98,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Chicken" type="CharacterBody2D" node_paths=PackedStringArray("DeadState", "DeadFallingState")]
+[node name="Chicken" type="CharacterBody2D" node_paths=PackedStringArray("_stateMachine", "DeadState", "DeadFallingState")]
 script = ExtResource("1_1yv3s")
+_stateMachine = NodePath("StateMachine")
 DeadState = NodePath("StateMachine/Dead")
 DeadFallingState = NodePath("StateMachine/DeadFalling")
 
@@ -112,22 +113,26 @@ polygon = PackedVector2Array(-11, -1, -3, -4, 11, -4, 11, -4, 11, 1, 0, 7)
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("StartingState")]
 script = ExtResource("3_nutj5")
 StartingState = NodePath("Default")
+metadata/_custom_type_script = "uid://4n71cb07o423"
 
-[node name="Default" type="Node" parent="StateMachine" node_paths=PackedStringArray("FallingState")]
+[node name="Default" type="Node" parent="StateMachine" node_paths=PackedStringArray("fallingState", "animations")]
 script = ExtResource("4_rc7ma")
-FallingState = NodePath("../Falling")
+fallingState = NodePath("../Falling")
+animations = NodePath("../../Animations")
 
-[node name="Flapping" type="Node" parent="StateMachine" node_paths=PackedStringArray("FallingState")]
+[node name="Flapping" type="Node" parent="StateMachine" node_paths=PackedStringArray("fallingState")]
 script = ExtResource("5_0du8g")
-FallingState = NodePath("../Falling")
+fallingState = NodePath("../Falling")
 
-[node name="Falling" type="Node" parent="StateMachine" node_paths=PackedStringArray("FlappingState")]
+[node name="Falling" type="Node" parent="StateMachine" node_paths=PackedStringArray("flappingState")]
 script = ExtResource("6_bti8l")
-FlappingState = NodePath("../Flapping")
+flappingState = NodePath("../Flapping")
 
-[node name="Dead" type="Node" parent="StateMachine" node_paths=PackedStringArray("DefaultState")]
+[node name="Dead" type="Node" parent="StateMachine" node_paths=PackedStringArray("defaultState", "animations")]
 script = ExtResource("8_5sgx4")
-DefaultState = NodePath("../Default")
+defaultState = NodePath("../Default")
+animations = NodePath("../../Animations")
 
-[node name="DeadFalling" type="Node" parent="StateMachine"]
+[node name="DeadFalling" type="Node" parent="StateMachine" node_paths=PackedStringArray("animations")]
 script = ExtResource("9_8aah5")
+animations = NodePath("../../Animations")

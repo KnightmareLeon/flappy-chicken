@@ -1,18 +1,18 @@
-using Godot;
-using System;
-
-public partial class ScorerMoving : State
+namespace Godot.Game
 {
-    [Export]
-    AreaMovementComponent areaMovementComponent;
-    public override State ProcessFrame(double delta)
+    public partial class ScorerMoving : State
     {
-        Vector2 position = areaMovementComponent.Move();
-        if (position.X <= -48)
+        [Export]
+        AreaMovementComponent areaMovementComponent;
+        public override State ProcessFrame(double delta)
         {
-            Parent.QueueFree();
+            Vector2 position = areaMovementComponent.Move();
+            if (position.X <= -48)
+            {
+                Parent.QueueFree();
+            }
+            return null;
         }
-        return null;
-    }
 
+    }
 }

@@ -1,34 +1,29 @@
-using Godot;
-
-public partial class Falling : State
+namespace Godot.Game
 {
+    public partial class Falling : ChickenState
+    {
 
-    [Export]
-    State FlappingState;
-    Chicken chicken;
-    
-    public override void Enter()
-    {
-        chicken = (Chicken)Parent;
-    }
+        [Export]
+        private State flappingState;
 
-    public override State ProcessInput(InputEvent inputEvent)
-    {
-        if (Input.IsActionJustPressed("flap"))
+        public override State ProcessInput(InputEvent inputEvent)
         {
-            return FlappingState;
+            if (Input.IsActionJustPressed("flap"))
+            {
+                return flappingState;
+            }
+            return null;
         }
-        return null;
-    }
-    public override State ProcessPhysics(double delta)
-    {
-        chicken.Velocity = Vector2.Down * chicken.Speed;
-        if (chicken.Tilt > -1.5708f) // 90 degrees
+        public override State ProcessPhysics(double delta)
         {
-            chicken.Rotate(Chicken.TILT_DEGREE);
-            chicken.Tilt -= Chicken.TILT_DEGREE;
+            Chicken.Velocity = Vector2.Down * Chicken.Speed;
+            if (Chicken.Tilt > -1.5708f) // 90 degrees
+            {
+                Chicken.Rotate(Chicken.TILT_DEGREE);
+                Chicken.Tilt -= Chicken.TILT_DEGREE;
+            }
+            Chicken.MoveAndSlide();
+            return null;
         }
-        chicken.MoveAndSlide();
-        return null;
     }
 }

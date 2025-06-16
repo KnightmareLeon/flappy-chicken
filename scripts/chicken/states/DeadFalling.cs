@@ -1,22 +1,23 @@
-using Godot;
-
-public partial class DeadFalling : State
+namespace Godot.Game
 {
-
-    Chicken chicken;
-    public override void Enter()
+    public partial class DeadFalling : ChickenState
     {
-        chicken = (Chicken)Parent;
-        chicken.Animations.Play("dead_falling");
-    }
+        [Export]
+        private AnimatedSprite2D animations;
+        public override void Enter()
+        {
+            base.Enter();
+            animations.Play("dead_falling");
+        }
 
-    public override State ProcessPhysics(double delta)
-    {
-        chicken.Velocity = Vector2.Down * chicken.Speed;
-        chicken.Rotate(Chicken.TILT_DEGREE);
-        chicken.Tilt -= Chicken.TILT_DEGREE;
-        chicken.MoveAndSlide();
-        return null;
-    }
+        public override State ProcessPhysics(double delta)
+        {
+            Chicken.Velocity = Vector2.Down * Chicken.Speed;
+            Chicken.Rotate(Chicken.TILT_DEGREE);
+            Chicken.Tilt -= Chicken.TILT_DEGREE;
+            Chicken.MoveAndSlide();
+            return null;
+        }
 
+    }
 }

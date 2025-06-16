@@ -10,38 +10,32 @@ public partial class Chicken : CharacterBody2D
 	public const float TILT_DEGREE = 0.0872665f;
 
 	[Export]
+	private StateMachine _stateMachine;
+	[Export]
 	private State DeadState;
 	[Export]
 	private State DeadFallingState;
-	public AnimatedSprite2D Animations;
-	public StateMachine StateMachine;
-	public override void _Ready()
-	{
-		Animations = GetNode<AnimatedSprite2D>("Animations");
-		StateMachine = (StateMachine)GetNode<Node>("StateMachine");
-		StateMachine.Initialize(this);
-	}
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		StateMachine.ProcessInput(@event);
+		_stateMachine.ProcessInput(@event);
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 
-		StateMachine.ProcessPhysics(delta);
+		_stateMachine.ProcessPhysics(delta);
 
 	}
 
 	public void OnEnteringGround(Node2D body)
 	{
-		StateMachine.ChangeState(DeadState);
+		_stateMachine.ChangeState(DeadState);
 	}
 
 	public void OnEnteringPipe(Node2D body)
 	{
-		StateMachine.ChangeState(DeadFallingState);
+		_stateMachine.ChangeState(DeadFallingState);
 	}
 
 }

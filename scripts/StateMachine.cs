@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 
 [GlobalClass]
@@ -5,9 +6,19 @@ public partial class StateMachine : Node
 {
 
     [Export]
-    protected State StartingState;
+    protected State StartingState {get; set;}
 
-    protected State CurrentState;
+    protected State CurrentState {get; set;}
+
+    public override void _Ready()
+    {
+        Node parent = GetParent<Node>();
+        foreach (State child in GetChildren().Cast<State>())
+        {
+            child.Parent = parent;
+        }
+        ChangeState(StartingState);
+    }
 
     public void Initialize(Node parent)
     {

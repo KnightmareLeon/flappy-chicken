@@ -1,14 +1,15 @@
-using Godot;
-
-public partial class PipeStopped : State
+namespace Godot.Game
 {
-
-    public override State ProcessInput(InputEvent inputEvent)
+    public partial class PipeStopped : State
     {
-        if (Input.IsActionJustPressed("start"))
+
+        public override State ProcessInput(InputEvent inputEvent)
         {
-            Parent.QueueFree();
+            if (Input.IsActionJustPressed("start"))
+            {
+                Parent.QueueFree();
+            }
+            return null;
         }
-        return null;
     }
 }

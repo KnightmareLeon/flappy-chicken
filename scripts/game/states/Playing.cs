@@ -1,23 +1,25 @@
-using Godot;
-
-public partial class Playing : State
+namespace Godot.Game
 {
 
-    private Game game;
-
-    public override void Enter()
+    public partial class Playing : State
     {
-        game = (Game)Parent;
-    }
 
-    public override State ProcessFrame(double delta)
-    {
-        if (--game.pipeGenerationStart <= 0)
+        private Game game;
+
+        public override void Enter()
         {
-            game.GeneratePipe();
-            game.pipeGenerationStart = game.pipeGenerationInterval;
+            game = (Game)Parent;
         }
-        return null;
-    }
 
+        public override State ProcessFrame(double delta)
+        {
+            if (--game.PipeGenerationStart <= 0)
+            {
+                game.GeneratePipe();
+                game.PipeGenerationStart = game.PipeGenerationInterval;
+            }
+            return null;
+        }
+
+    }
 }

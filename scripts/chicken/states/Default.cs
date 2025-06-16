@@ -1,22 +1,27 @@
-using Godot;
-
-public partial class Default : State
+namespace Godot.Game
 {
-    [Export]
-    State FallingState;
-    public override void Enter()
-    {
-        Chicken parent = (Chicken)Parent;
-        parent.Animations.Play("default");
-        parent.Position = new Vector2(256, 384);
 
-    }
-    public override State ProcessInput(InputEvent inputEvent)
+    public partial class Default : ChickenState
     {
-        if (Input.IsActionJustPressed("start"))
+        [Export]
+        private State fallingState;
+        [Export]
+        private AnimatedSprite2D animations;
+        public override void Enter()
         {
-            return FallingState;
+            base.Enter();
+            animations.Play("default");
+            Chicken.Position = new Vector2(256, 384);
+
         }
-        return null;
+        public override State ProcessInput(InputEvent inputEvent)
+        {
+            if (Input.IsActionJustPressed("start"))
+            {
+                return fallingState;
+            }
+            return null;
+        }
+
     }
 }

@@ -1,25 +1,28 @@
-using Godot;
-
-public partial class Dead : State
+namespace Godot.Game
 {
-
-    [Export]
-    State DefaultState;
-    Chicken chicken;
-    public override void Enter()
+    public partial class Dead : ChickenState
     {
-        chicken = (Chicken)Parent;
-        chicken.Animations.Play("dying");
-        chicken.Rotate(chicken.Tilt);
-        chicken.Tilt = 0f;
-    }
 
-    public override State ProcessInput(InputEvent inputEvent)
-    {
-        if (Input.IsActionJustPressed("start"))
+        [Export]
+        private State defaultState;
+        [Export]
+        private AnimatedSprite2D animations;
+        public override void Enter()
         {
-            return DefaultState;
+            base.Enter();
+            animations.Play("dying");
+            Chicken.Rotate(Chicken.Tilt);
+            Chicken.Tilt = 0f;
         }
-        return null;
+
+        public override State ProcessInput(InputEvent inputEvent)
+        {
+            if (Input.IsActionJustPressed("start"))
+            {
+                return defaultState;
+            }
+            return null;
+        }
+
     }
 }

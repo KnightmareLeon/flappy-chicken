@@ -118,9 +118,10 @@ sources/1 = SubResource("TileSetAtlasSource_lmksl")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3lc0u"]
 size = Vector2(575, 47.75)
 
-[node name="Ground" type="Area2D" node_paths=PackedStringArray("StoppedState")]
+[node name="Ground" type="Area2D" node_paths=PackedStringArray("_stateMachine", "stoppedState")]
 script = ExtResource("1_1ywih")
-StoppedState = NodePath("StateMachine/Stopped")
+_stateMachine = NodePath("StateMachine")
+stoppedState = NodePath("StateMachine/Stopped")
 
 [node name="AreaMovementComponent" parent="." instance=ExtResource("2_ct7o8")]
 
@@ -135,13 +136,14 @@ shape = SubResource("RectangleShape2D_3lc0u")
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("StartingState")]
 script = ExtResource("3_ct7o8")
 StartingState = NodePath("Moving")
+metadata/_custom_type_script = "uid://4n71cb07o423"
 
 [node name="Moving" type="Node" parent="StateMachine" node_paths=PackedStringArray("areaMovementComponent")]
 script = ExtResource("4_vjnaj")
 areaMovementComponent = NodePath("../../AreaMovementComponent")
 
-[node name="Stopped" type="Node" parent="StateMachine" node_paths=PackedStringArray("MovingState")]
+[node name="Stopped" type="Node" parent="StateMachine" node_paths=PackedStringArray("movingState")]
 script = ExtResource("5_hokwi")
-MovingState = NodePath("../Moving")
+movingState = NodePath("../Moving")
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]

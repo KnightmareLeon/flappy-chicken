@@ -9,9 +9,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jvlis"]
 size = Vector2(30, 768)
 
-[node name="Scorer" type="Area2D" node_paths=PackedStringArray("StoppedState")]
+[node name="Scorer" type="Area2D" node_paths=PackedStringArray("_stateMachine", "stoppedState")]
 script = ExtResource("1_agqv6")
-StoppedState = NodePath("StateMachine/ScorerStopped")
+_stateMachine = NodePath("StateMachine")
+stoppedState = NodePath("StateMachine/ScorerStopped")
 
 [node name="AreaMovementComponent" parent="." instance=ExtResource("1_fxg3i")]
 position = Vector2(120.077, -238.851)

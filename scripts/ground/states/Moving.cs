@@ -1,20 +1,21 @@
-using Godot;
-
-public partial class Moving : State
+namespace Godot.Game
 {
-
-    [Export]
-    AreaMovementComponent areaMovementComponent;
-
-    public override State ProcessFrame(double delta)
+    public partial class Moving : State
     {
-        Vector2 position = areaMovementComponent.Move();
-        if (position.X <= 224)
+
+        [Export]
+        private AreaMovementComponent areaMovementComponent;
+
+        public override State ProcessFrame(double delta)
         {
-            Ground parent = (Ground)Parent;
-            position.X = 272;
-            parent.Position = position;
+            Vector2 position = areaMovementComponent.Move();
+            if (position.X <= 224)
+            {
+                Ground parent = (Ground)Parent;
+                position.X = 272;
+                parent.Position = position;
+            }
+            return null;
         }
-        return null;
     }
 }

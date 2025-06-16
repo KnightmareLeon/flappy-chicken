@@ -1,29 +1,28 @@
-using Godot;
-
-public partial class Scorer : Area2D
+namespace Godot.Game
 {
-    public StateMachine StateMachine;
-    [Export]
-    State StoppedState;
-    public override void _Ready()
-    {
-        StateMachine = (StateMachine)GetNode<Node>("StateMachine");
-        StateMachine.Initialize(this);
-    }
 
-    public override void _Process(double delta)
+    public partial class Scorer : Area2D
     {
-        StateMachine.ProcessFrame(delta);
-    }
+        [Export]
+        private StateMachine _stateMachine;
+        [Export]
+        private State stoppedState;
 
-    public override void _UnhandledInput(InputEvent @event)
-    {
-        StateMachine.ProcessInput(@event);
-    }
+        public override void _Process(double delta)
+        {
+            _stateMachine.ProcessFrame(delta);
+        }
+
+        public override void _UnhandledInput(InputEvent @event)
+        {
+            _stateMachine.ProcessInput(@event);
+        }
 
 
-    public void ChickenEnteredGround(Node2D body)
-    {
-        StateMachine.ChangeState(StoppedState);
+        public void ChickenEnteredGround(Node2D body)
+        {
+            _stateMachine.ChangeState(stoppedState);
+        }
+
     }
 }

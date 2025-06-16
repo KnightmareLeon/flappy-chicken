@@ -4,7 +4,7 @@ using Godot;
 public partial class State : Node
 {
 
-    public Node Parent;
+    public Node Parent { get; set; }
 
     public virtual void Enter()
     {
