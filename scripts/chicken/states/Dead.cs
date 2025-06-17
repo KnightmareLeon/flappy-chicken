@@ -10,9 +10,11 @@ namespace Godot.Game.FlappyChicken.ChickenStates
         public override void Enter()
         {
             base.Enter();
-            _animations.Play("dying");
             Chicken.Rotate(Chicken.Tilt);
             Chicken.Tilt = 0f;
+            Vector2 position = new(Chicken.Position.X, 708);
+            Chicken.Position = position;
+            _animations.Play("dying");
         }
 
         public override State ProcessInput(InputEvent inputEvent)
