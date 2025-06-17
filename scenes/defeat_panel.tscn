@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bq52yl4cl00pj"]
+
+[sub_resource type="Theme" id="Theme_be1gs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o30fg"]
+bg_color = Color(0.813684, 0.521454, 0.305847, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.386203, 0.286601, 1.44392e-07, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="DefeatPanel" type="Panel"]
+offset_left = 57.0
+offset_top = 53.0
+offset_right = 460.0
+offset_bottom = 501.0
+theme = SubResource("Theme_be1gs")
+theme_override_styles/panel = SubResource("StyleBoxFlat_o30fg")
