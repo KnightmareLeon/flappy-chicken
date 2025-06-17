@@ -8,7 +8,8 @@ namespace Godot.Game.FlappyChicken
 
 		public float Tilt { get; set; } = 0f;
 		public const float TILT_DEGREE = 0.0872665f;
-
+		[Signal]
+		public delegate void ChickenScoredEventHandler();
 		[Export]
 		private StateMachine _stateMachine;
 
@@ -32,6 +33,11 @@ namespace Godot.Game.FlappyChicken
 		public void OnHittingPipe(Node2D body)
 		{
 			_stateMachine.ProcessSignal("OnHittingPipe", body);
+		}
+
+		public void OnEnteringScorer(Node2D body)
+		{
+			_stateMachine.ProcessSignal("OnEnteringScorer", body);
 		}
 
 	}

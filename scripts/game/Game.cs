@@ -7,11 +7,14 @@ namespace Godot.Game.FlappyChicken
         public int PipeGenerationStart { get; set; } = 300;
         [Export]
         public int PipeGenerationInterval { get; set; } = 80;
+
+        public int Score { get; set; } = 0;
         [Export]
         private StateMachine _stateMachine;
         private Chicken _chicken;
 
         private Ground _ground;
+
         public override void _Ready()
         {
             _chicken = (Chicken)GetNode<CharacterBody2D>("Chicken");
@@ -48,6 +51,7 @@ namespace Godot.Game.FlappyChicken
             _ground.BodyEntered += pipe.ChickenHitGround;
             _ground.BodyEntered += scorer.ChickenHitGround;
             pipe.BodyEntered += _chicken.OnHittingPipe;
+            scorer.BodyEntered += _chicken.OnEnteringScorer;
 
             AddChild(pipe);
             AddChild(scorer);
@@ -56,6 +60,11 @@ namespace Godot.Game.FlappyChicken
         private void ChickenHitGround(Node2D body)
         {
             _stateMachine.ProcessSignal("ChickenHitGround", body);
+        }
+
+        private void OnChickenScoring()
+        {
+            GD.Print(++Score);
         }
 
     }

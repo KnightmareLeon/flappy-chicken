@@ -12,5 +12,11 @@ namespace Godot.Game.FlappyChicken
             }
             return null;
         }
+
+        public override void Exit()
+        {
+            Game game = (Game)Parent;
+            game.Score = 0;
+        }
     }
 }

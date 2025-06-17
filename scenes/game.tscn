@@ -44,4 +44,5 @@ _defeatState = NodePath("../Defeat")
 script = ExtResource("8_0tnpc")
 _startState = NodePath("../Start")
 
+[connection signal="ChickenScored" from="Chicken" to="." method="OnChickenScoring"]
 [connection signal="body_entered" from="Ground" to="." method="ChickenHitGround"]

@@ -40,6 +40,10 @@ namespace Godot.Game.FlappyChicken.ChickenStates
             {
                 return _deadFallingState;
             }
+            if (signalName == "OnEnteringScorer")
+            {
+                Chicken.EmitSignal(nameof(Chicken.ChickenScored));
+            }
             return null;
         }
     }

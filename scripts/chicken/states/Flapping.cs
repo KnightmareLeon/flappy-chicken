@@ -1,5 +1,3 @@
-using System;
-
 namespace Godot.Game.FlappyChicken.ChickenStates
 {
     public partial class Flapping : ChickenState
@@ -53,6 +51,10 @@ namespace Godot.Game.FlappyChicken.ChickenStates
             if (signalName == "OnHittingPipe")
             {
                 return _deadFallingState;
+            }
+            if (signalName == "OnEnteringScorer")
+            {
+                Chicken.EmitSignal(nameof(Chicken.ChickenScored));
             }
             return null;
         }
