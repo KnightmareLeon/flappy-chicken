@@ -9,12 +9,11 @@
 [ext_resource type="Script" uid="uid://ccp46x8ok8nhw" path="res://scripts/game/states/Playing.cs" id="7_gee14"]
 [ext_resource type="Script" uid="uid://cakanl3y523gh" path="res://scripts/game/states/Defeat.cs" id="8_0tnpc"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("_stateMachine", "defeatState")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_stateMachine")]
 script = ExtResource("1_p57ef")
 PipeGenerationStart = 0
 PipeGenerationInterval = 100
 _stateMachine = NodePath("StateMachine")
-defeatState = NodePath("StateMachine/Defeat")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(256, 384)
@@ -33,15 +32,16 @@ script = ExtResource("5_u5sy4")
 StartingState = NodePath("Start")
 metadata/_custom_type_script = "uid://4n71cb07o423"
 
-[node name="Start" type="Node" parent="StateMachine" node_paths=PackedStringArray("playingState")]
+[node name="Start" type="Node" parent="StateMachine" node_paths=PackedStringArray("_playingState")]
 script = ExtResource("6_gee14")
-playingState = NodePath("../Playing")
+_playingState = NodePath("../Playing")
 
-[node name="Playing" type="Node" parent="StateMachine"]
+[node name="Playing" type="Node" parent="StateMachine" node_paths=PackedStringArray("_defeatState")]
 script = ExtResource("7_gee14")
+_defeatState = NodePath("../Defeat")
 
-[node name="Defeat" type="Node" parent="StateMachine" node_paths=PackedStringArray("startState")]
+[node name="Defeat" type="Node" parent="StateMachine" node_paths=PackedStringArray("_startState")]
 script = ExtResource("8_0tnpc")
-startState = NodePath("../Start")
+_startState = NodePath("../Start")
 
-[connection signal="body_entered" from="Ground" to="." method="ChickenEnteredGround"]
+[connection signal="body_entered" from="Ground" to="." method="ChickenHitGround"]

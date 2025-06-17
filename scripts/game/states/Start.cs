@@ -1,22 +1,16 @@
-namespace Godot.Game
+namespace Godot.Game.FlappyChicken
 {
 
     public partial class Start : State
     {
 
         [Export]
-        private State playingState;
-
-        Game game;
-        public override void Enter()
-        {
-            game = (Game)Parent;
-        }
+        private State _playingState;
         public override State ProcessInput(InputEvent inputEvent)
         {
             if (Input.IsActionJustPressed("start"))
             {
-                return playingState;
+                return _playingState;
             }
             return null;
         }

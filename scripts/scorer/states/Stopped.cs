@@ -1,8 +1,7 @@
-namespace Godot.Game
+namespace Godot.Game.FlappyChicken.ScorerStates
 {
-    public partial class PipeStopped : State
+    public partial class Stopped : State
     {
-
         public override State ProcessInput(InputEvent inputEvent)
         {
             if (Input.IsActionJustPressed("start"))

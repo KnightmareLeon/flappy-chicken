@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://bhfp873gqbdkp" path="res://scripts/pipe/Pipe.cs" id="1_arpqm"]
 [ext_resource type="PackedScene" uid="uid://bntnm4eg51mx" path="res://scenes/area_movement_component.tscn" id="2_tdldm"]
 [ext_resource type="Script" uid="uid://4n71cb07o423" path="res://scripts/StateMachine.cs" id="3_4ybk5"]
-[ext_resource type="Script" uid="uid://btdet554k0sce" path="res://scripts/pipe/states/PipeMoving.cs" id="4_tdldm"]
-[ext_resource type="Script" uid="uid://lkxewaovvddf" path="res://scripts/pipe/states/PipeStopped.cs" id="5_ss4sx"]
+[ext_resource type="Script" uid="uid://blt7lwqep8jf4" path="res://scripts/pipe/states/Moving.cs" id="5_tdldm"]
+[ext_resource type="Script" uid="uid://cul664440brvm" path="res://scripts/pipe/states/Stopped.cs" id="6_ss4sx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8x3ej"]
 texture = ExtResource("1_8x3ej")
@@ -29,10 +29,9 @@ size = Vector2(32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ybk5"]
 size = Vector2(32, 256)
 
-[node name="Pipe" type="Area2D" node_paths=PackedStringArray("_stateMachine", "stoppedState")]
+[node name="Pipe" type="Area2D" node_paths=PackedStringArray("_stateMachine")]
 script = ExtResource("1_arpqm")
 _stateMachine = NodePath("StateMachine")
-stoppedState = NodePath("StateMachine/PipeStopped")
 
 [node name="AreaMovementComponent" parent="." instance=ExtResource("2_tdldm")]
 
@@ -62,12 +61,13 @@ debug_color = Color(0.642812, 0.523488, 0, 0.42)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("StartingState")]
 script = ExtResource("3_4ybk5")
-StartingState = NodePath("PipeMoving")
+StartingState = NodePath("Moving")
 metadata/_custom_type_script = "uid://4n71cb07o423"
 
-[node name="PipeMoving" type="Node" parent="StateMachine" node_paths=PackedStringArray("areaMovementComponent")]
-script = ExtResource("4_tdldm")
-areaMovementComponent = NodePath("../../AreaMovementComponent")
+[node name="Moving" type="Node" parent="StateMachine" node_paths=PackedStringArray("_areaMovementComponent", "_stoppedState")]
+script = ExtResource("5_tdldm")
+_areaMovementComponent = NodePath("../../AreaMovementComponent")
+_stoppedState = NodePath("../Stopped")
 
-[node name="PipeStopped" type="Node" parent="StateMachine"]
-script = ExtResource("5_ss4sx")
+[node name="Stopped" type="Node" parent="StateMachine"]
+script = ExtResource("6_ss4sx")

@@ -1,14 +1,16 @@
-using Godot;
-
-[GlobalClass]
-public partial class AreaMovementComponent : Node2D
+namespace Godot.Game.Component
 {
-    public Vector2 Move()
+
+    [GlobalClass]
+    public partial class AreaMovementComponent : Node2D
     {
-        Node2D parent = GetParent<Node2D>();
-        Vector2 position = parent.Position;
-        position.X -= 3;
-        parent.Position = position;
-        return position;
+        public Vector2 Move()
+        {
+            Node2D parent = GetParent<Node2D>();
+            Vector2 position = parent.Position;
+            position.X -= 3;
+            parent.Position = position;
+            return position;
+        }
     }
 }

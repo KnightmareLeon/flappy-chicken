@@ -1,16 +1,20 @@
-namespace Godot.Game
+namespace Godot.Game.FlappyChicken.ChickenStates
 {
     public partial class Falling : ChickenState
     {
 
         [Export]
-        private State flappingState;
+        private State _flappingState;
+        [Export]
+        private State _deadState;
+        [Export]
+        private State _deadFallingState;
 
         public override State ProcessInput(InputEvent inputEvent)
         {
             if (Input.IsActionJustPressed("flap"))
             {
-                return flappingState;
+                return _flappingState;
             }
             return null;
         }
@@ -23,6 +27,19 @@ namespace Godot.Game
                 Chicken.Tilt -= Chicken.TILT_DEGREE;
             }
             Chicken.MoveAndSlide();
+            return null;
+        }
+
+        public override State ProcessSignal(string signalName, params Variant[] args)
+        {
+            if (signalName == "OnHittingGround")
+            {
+                return _deadState;
+            }
+            if (signalName == "OnHittingPipe")
+            {
+                return _deadFallingState;
+            }
             return null;
         }
     }

@@ -1,11 +1,9 @@
-namespace Godot.Game
+namespace Godot.Game.FlappyChicken
 {
     public partial class Pipe : Area2D
     {
         [Export]
         private StateMachine _stateMachine;
-        [Export]
-        private State stoppedState;
         public override void _Ready()
         {
 
@@ -68,9 +66,9 @@ namespace Godot.Game
             _stateMachine.ProcessInput(@event);
         }
 
-        public void ChickenEnteredGround(Node2D body)
+        public void ChickenHitGround(Node2D body)
         {
-            _stateMachine.ChangeState(stoppedState);
+            _stateMachine.ProcessSignal("ChickenHitGround", body);
         }
     }
 }

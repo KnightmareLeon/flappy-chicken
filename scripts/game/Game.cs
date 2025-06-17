@@ -1,4 +1,4 @@
-namespace Godot.Game
+namespace Godot.Game.FlappyChicken
 {
 
     public partial class Game : Node2D
@@ -9,16 +9,14 @@ namespace Godot.Game
         public int PipeGenerationInterval { get; set; } = 80;
         [Export]
         private StateMachine _stateMachine;
-        [Export]
-        private State defeatState;
-        private Chicken chicken;
+        private Chicken _chicken;
 
-        private Ground ground;
+        private Ground _ground;
         public override void _Ready()
         {
-            chicken = (Chicken)GetNode<CharacterBody2D>("Chicken");
-            ground = (Ground)GetNode<Area2D>("Ground");
-            ground.BodyEntered += chicken.OnEnteringGround;
+            _chicken = (Chicken)GetNode<CharacterBody2D>("Chicken");
+            _ground = (Ground)GetNode<Area2D>("Ground");
+            _ground.BodyEntered += _chicken.OnHittingGround;
         }
 
         public override void _UnhandledInput(InputEvent @event)
@@ -47,17 +45,17 @@ namespace Godot.Game
             scorer.Position = position;
             pipe.Scale = scale;
 
-            ground.BodyEntered += pipe.ChickenEnteredGround;
-            ground.BodyEntered += scorer.ChickenEnteredGround;
-            pipe.BodyEntered += chicken.OnEnteringPipe;
+            _ground.BodyEntered += pipe.ChickenHitGround;
+            _ground.BodyEntered += scorer.ChickenHitGround;
+            pipe.BodyEntered += _chicken.OnHittingPipe;
 
             AddChild(pipe);
             AddChild(scorer);
         }
 
-        private void ChickenEnteredGround(Node2D body)
+        private void ChickenHitGround(Node2D body)
         {
-            _stateMachine.ChangeState(defeatState);
+            _stateMachine.ProcessSignal("ChickenHitGround", body);
         }
 
     }

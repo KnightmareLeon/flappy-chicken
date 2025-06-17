@@ -1,4 +1,4 @@
-namespace Godot.Game
+namespace Godot.Game.FlappyChicken.ChickenStates
 {
 
     [GlobalClass]

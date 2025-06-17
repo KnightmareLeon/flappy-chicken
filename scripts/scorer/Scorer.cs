@@ -1,12 +1,10 @@
-namespace Godot.Game
+namespace Godot.Game.FlappyChicken
 {
 
     public partial class Scorer : Area2D
     {
         [Export]
         private StateMachine _stateMachine;
-        [Export]
-        private State stoppedState;
 
         public override void _Process(double delta)
         {
@@ -19,9 +17,9 @@ namespace Godot.Game
         }
 
 
-        public void ChickenEnteredGround(Node2D body)
+        public void ChickenHitGround(Node2D body)
         {
-            _stateMachine.ChangeState(stoppedState);
+            _stateMachine.ProcessSignal("ChickenHitGround", body);
         }
 
     }

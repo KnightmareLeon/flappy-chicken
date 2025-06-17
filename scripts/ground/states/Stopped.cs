@@ -1,15 +1,16 @@
-using Godot;
-
-public partial class Stopped : State
+namespace Godot.Game.FlappyChicken.GroundStates
 {
-    [Export]
-    private State movingState;
-    public override State ProcessInput(InputEvent inputEvent)
+    public partial class Stopped : State
     {
-        if (Input.IsActionJustPressed("start"))
+        [Export]
+        private State _movingState;
+        public override State ProcessInput(InputEvent inputEvent)
         {
-            return movingState;
+            if (Input.IsActionJustPressed("start"))
+            {
+                return _movingState;
+            }
+            return null;
         }
-        return null;
     }
 }

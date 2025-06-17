@@ -1,13 +1,15 @@
-namespace Godot.Game
+namespace Godot.Game.FlappyChicken.ChickenStates
 {
     public partial class DeadFalling : ChickenState
     {
         [Export]
-        private AnimatedSprite2D animations;
+        private AnimatedSprite2D _animations;
+        [Export]
+        private State _deadState;
         public override void Enter()
         {
             base.Enter();
-            animations.Play("dead_falling");
+            _animations.Play("dead_falling");
         }
 
         public override State ProcessPhysics(double delta)
@@ -16,6 +18,15 @@ namespace Godot.Game
             Chicken.Rotate(Chicken.TILT_DEGREE);
             Chicken.Tilt -= Chicken.TILT_DEGREE;
             Chicken.MoveAndSlide();
+            return null;
+        }
+
+        public override State ProcessSignal(string signalName, params Variant[] args)
+        {
+            if (signalName == "OnHittingGround")
+            {
+                return _deadState;
+            }
             return null;
         }
 

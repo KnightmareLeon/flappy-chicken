@@ -1,10 +1,14 @@
-namespace Godot.Game
+
+namespace Godot.Game.FlappyChicken
 {
 
     public partial class Playing : State
     {
 
         private Game game;
+
+        [Export]
+        private State _defeatState;
 
         public override void Enter()
         {
@@ -17,6 +21,15 @@ namespace Godot.Game
             {
                 game.GeneratePipe();
                 game.PipeGenerationStart = game.PipeGenerationInterval;
+            }
+            return null;
+        }
+
+        public override State ProcessSignal(string signalName, params Variant[] args)
+        {
+            if (signalName == "ChickenHitGround")
+            {
+                return _defeatState;
             }
             return null;
         }

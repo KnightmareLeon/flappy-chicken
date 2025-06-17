@@ -1,17 +1,9 @@
-namespace Godot.Game
+namespace Godot.Game.FlappyChicken
 {
     public partial class Ground : Area2D
     {
         [Export]
         private StateMachine _stateMachine;
-
-        [Export]
-        private State stoppedState;
-
-        private void OnBodyEntered(Node2D body)
-        {
-            _stateMachine.ChangeState(stoppedState);
-        }
 
         public override void _UnhandledInput(InputEvent @event)
         {
@@ -23,5 +15,9 @@ namespace Godot.Game
             _stateMachine.ProcessFrame(delta);
         }
 
+        private void OnBodyEntered(Node2D body)
+        {
+            _stateMachine.ProcessSignal("OnBodyEntered", body);
+        }
     }
 }

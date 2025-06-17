@@ -1,32 +1,20 @@
-using Godot;
-
-[GlobalClass]
-public partial class State : Node
+namespace Godot.Game
 {
-
-    public Node Parent { get; set; }
-
-    public virtual void Enter()
+    [GlobalClass]
+    public partial class State : Node
     {
 
-    }
-    public virtual void Exit()
-    {
+        public Node Parent { get; set; }
 
-    }
+        public virtual void Enter() { }
+        public virtual void Exit() { }
 
-    public virtual State ProcessPhysics(double delta)
-    {
-        return null;
-    }
+        public virtual State ProcessPhysics(double delta) => null;
 
-    public virtual State ProcessInput(InputEvent inputEvent)
-    {
-        return null;
-    }
+        public virtual State ProcessInput(InputEvent inputEvent) => null;
 
-    public virtual State ProcessFrame(double delta)
-    {
-        return null;
+        public virtual State ProcessFrame(double delta) => null;
+
+        public virtual State ProcessSignal(string signalName, params Variant[] args) => null;
     }
 }

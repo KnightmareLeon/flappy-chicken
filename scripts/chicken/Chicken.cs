@@ -1,41 +1,38 @@
-using Godot;
-
-public partial class Chicken : CharacterBody2D
+namespace Godot.Game.FlappyChicken
 {
-	[Export]
-	public int Speed { get; set; } = 320;
-	public int FlapTimer = 0;
-
-	public float Tilt { get; set; } = 0f;
-	public const float TILT_DEGREE = 0.0872665f;
-
-	[Export]
-	private StateMachine _stateMachine;
-	[Export]
-	private State DeadState;
-	[Export]
-	private State DeadFallingState;
-
-	public override void _UnhandledInput(InputEvent @event)
+	public partial class Chicken : CharacterBody2D
 	{
-		_stateMachine.ProcessInput(@event);
+		[Export]
+		public int Speed { get; set; } = 320;
+		public int FlapTimer { get; set; } = 0;
+
+		public float Tilt { get; set; } = 0f;
+		public const float TILT_DEGREE = 0.0872665f;
+
+		[Export]
+		private StateMachine _stateMachine;
+
+		public override void _UnhandledInput(InputEvent @event)
+		{
+			_stateMachine.ProcessInput(@event);
+		}
+
+		public override void _PhysicsProcess(double delta)
+		{
+
+			_stateMachine.ProcessPhysics(delta);
+
+		}
+
+		public void OnHittingGround(Node2D body)
+		{
+			_stateMachine.ProcessSignal("OnHittingGround", body);
+		}
+
+		public void OnHittingPipe(Node2D body)
+		{
+			_stateMachine.ProcessSignal("OnHittingPipe", body);
+		}
+
 	}
-
-	public override void _PhysicsProcess(double delta)
-	{
-
-		_stateMachine.ProcessPhysics(delta);
-
-	}
-
-	public void OnEnteringGround(Node2D body)
-	{
-		_stateMachine.ChangeState(DeadState);
-	}
-
-	public void OnEnteringPipe(Node2D body)
-	{
-		_stateMachine.ChangeState(DeadFallingState);
-	}
-
 }

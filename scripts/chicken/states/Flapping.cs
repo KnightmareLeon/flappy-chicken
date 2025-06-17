@@ -1,10 +1,16 @@
-namespace Godot.Game
+using System;
+
+namespace Godot.Game.FlappyChicken.ChickenStates
 {
     public partial class Flapping : ChickenState
     {
 
         [Export]
-        private State fallingState;
+        private State _fallingState;
+        [Export]
+        private State _deadState;
+        [Export]
+        private State _deadFallingState;
         public override void Enter()
         {
             base.Enter();
@@ -34,7 +40,19 @@ namespace Godot.Game
             }
             else
             {
-                return fallingState;
+                return _fallingState;
+            }
+            return null;
+        }
+        public override State ProcessSignal(string signalName, params Variant[] args)
+        {
+            if (signalName == "OnHittingGround")
+            {
+                return _deadState;
+            }
+            if (signalName == "OnHittingPipe")
+            {
+                return _deadFallingState;
             }
             return null;
         }

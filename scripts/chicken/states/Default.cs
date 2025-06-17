@@ -1,16 +1,16 @@
-namespace Godot.Game
+namespace Godot.Game.FlappyChicken.ChickenStates
 {
 
     public partial class Default : ChickenState
     {
         [Export]
-        private State fallingState;
+        private State _fallingState;
         [Export]
-        private AnimatedSprite2D animations;
+        private AnimatedSprite2D _animations;
         public override void Enter()
         {
             base.Enter();
-            animations.Play("default");
+            _animations.Play("default");
             Chicken.Position = new Vector2(256, 384);
 
         }
@@ -18,7 +18,7 @@ namespace Godot.Game
         {
             if (Input.IsActionJustPressed("start"))
             {
-                return fallingState;
+                return _fallingState;
             }
             return null;
         }
