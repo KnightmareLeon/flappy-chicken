@@ -13,6 +13,7 @@ namespace Godot.Game.FlappyChicken
         public override void Enter()
         {
             game = (Game)Parent;
+            game.AddScoreLabel();
         }
 
         public override State ProcessFrame(double delta)
@@ -30,6 +31,10 @@ namespace Godot.Game.FlappyChicken
             if (signalName == "ChickenHitGround")
             {
                 return _defeatState;
+            }
+            if (signalName == "OnChickenScoring")
+            {
+                game.EmitSignal(nameof(game.UpdateScore), ++game.Score);
             }
             return null;
         }

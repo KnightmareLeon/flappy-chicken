@@ -24,6 +24,10 @@ window/size/viewport_height=768
 
 project/assembly_name="Flappy Chicken"
 
+[gui]
+
+theme/custom_font="uid://cojia0eiq464"
+
 [input]
 
 flap={

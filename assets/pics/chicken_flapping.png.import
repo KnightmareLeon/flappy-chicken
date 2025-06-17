@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cr3ibsmpvs5en"
-path="res://.godot/imported/pipes.png-f5f0a7166e139fb58f7221e2e35d6ed1.ctex"
+uid="uid://doftdlivqv2md"
+path="res://.godot/imported/chicken_flapping.png-ab74eab04bd20527f2c08d0761b29fcf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pipes.png"
-dest_files=["res://.godot/imported/pipes.png-f5f0a7166e139fb58f7221e2e35d6ed1.ctex"]
+source_file="res://assets/pics/chicken_flapping.png"
+dest_files=["res://.godot/imported/chicken_flapping.png-ab74eab04bd20527f2c08d0761b29fcf.ctex"]
 
 [params]
 

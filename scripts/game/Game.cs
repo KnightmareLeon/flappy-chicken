@@ -15,6 +15,8 @@ namespace Godot.Game.FlappyChicken
 
         private Ground _ground;
 
+        [Signal]
+        public delegate void UpdateScoreEventHandler(int score);
         public override void _Ready()
         {
             _chicken = (Chicken)GetNode<CharacterBody2D>("Chicken");
@@ -54,7 +56,22 @@ namespace Godot.Game.FlappyChicken
             scorer.BodyEntered += _chicken.OnEnteringScorer;
 
             AddChild(pipe);
+            MoveChild(pipe, 1);
             AddChild(scorer);
+            MoveChild(scorer, 1);
+        }
+
+        public void AddScoreLabel()
+        {
+            PackedScene scoreScene = GD.Load<PackedScene>("res://scenes/score.tscn");
+
+            Score score = (Score)scoreScene.Instantiate();
+            score.Text = Score.ToString();
+
+            UpdateScore += score.OnUpdateScore;
+            _ground.BodyEntered += score.ChickenHitGround;
+
+            AddChild(score);
         }
 
         private void ChickenHitGround(Node2D body)
@@ -64,7 +81,7 @@ namespace Godot.Game.FlappyChicken
 
         private void OnChickenScoring()
         {
-            GD.Print(++Score);
+            _stateMachine.ProcessSignal("OnChickenScoring");
         }
 
     }

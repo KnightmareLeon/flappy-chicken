@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxjmrqic3kd05"
-path="res://.godot/imported/chicken_dead.png-f4d62a93314193f6b2ed76b39e6fbfd8.ctex"
+uid="uid://c0dr2hmxyfrgm"
+path="res://.godot/imported/bg.png-a7b409d5e4a67b5928e1106d90888d76.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/chicken_dead.png"
-dest_files=["res://.godot/imported/chicken_dead.png-f4d62a93314193f6b2ed76b39e6fbfd8.ctex"]
+source_file="res://assets/pics/bg.png"
+dest_files=["res://.godot/imported/bg.png-a7b409d5e4a67b5928e1106d90888d76.ctex"]
 
 [params]
 
