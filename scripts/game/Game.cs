@@ -74,6 +74,15 @@ namespace Godot.Game.FlappyChicken
             AddChild(score);
         }
 
+        public void LoadDefeatPanel()
+        {
+            PackedScene defeatPanelScene = GD.Load<PackedScene>("res://scenes/defeat_panel.tscn");
+
+            DefeatPanel defeatPanel = (DefeatPanel)defeatPanelScene.Instantiate();
+
+            AddChild(defeatPanel);
+        }
+
         private void ChickenHitGround(Node2D body)
         {
             _stateMachine.ProcessSignal("ChickenHitGround", body);

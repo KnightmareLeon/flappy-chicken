@@ -4,6 +4,13 @@ namespace Godot.Game.FlappyChicken
     {
         [Export]
         private State _startState;
+        private Game game;
+
+        public override void Enter()
+        {
+            game = (Game)Parent;
+            game.LoadDefeatPanel();
+        }
         public override State ProcessInput(InputEvent inputEvent)
         {
             if (Input.IsActionJustPressed("start"))
@@ -15,7 +22,6 @@ namespace Godot.Game.FlappyChicken
 
         public override void Exit()
         {
-            Game game = (Game)Parent;
             game.Score = 0;
         }
     }
