@@ -1,14 +1,12 @@
-namespace Godot.Game.FlappyChicken.ScorerStates
+namespace Godot.Game.FlappyChicken.ScorerStates;
+public partial class Stopped : State
 {
-    public partial class Stopped : State
+    public override State ProcessInput(InputEvent inputEvent)
     {
-        public override State ProcessInput(InputEvent inputEvent)
+        if (Input.IsActionJustPressed("start"))
         {
-            if (Input.IsActionJustPressed("start"))
-            {
-                Parent.QueueFree();
-            }
-            return null;
+            Parent.QueueFree();
         }
+        return null;
     }
 }
