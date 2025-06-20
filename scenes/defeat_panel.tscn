@@ -18,7 +18,7 @@ shadow_size = 6
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o30fg"]
 
-[node name="DefeatPanel" type="PanelContainer" node_paths=PackedStringArray("_score")]
+[node name="DefeatPanel" type="PanelContainer" node_paths=PackedStringArray("_score", "_bestScoreLabel")]
 offset_left = 32.0
 offset_top = 93.0
 offset_right = 487.0
@@ -27,6 +27,7 @@ size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_be1gs")
 script = ExtResource("1_o30fg")
 _score = NodePath("MarginContainer/VBoxContainer/ScoreContainer/Score")
+_bestScoreLabel = NodePath("MarginContainer/VBoxContainer/BestScoreContainer/BestScore")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -57,16 +58,16 @@ layout_mode = 2
 theme_override_constants/separation = 23
 theme_override_styles/separator = SubResource("StyleBoxEmpty_o30fg")
 
-[node name="HighScoreContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="BestScoreContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HighScoreLabel" type="Label" parent="MarginContainer/VBoxContainer/HighScoreContainer"]
+[node name="BestScoreLabel" type="Label" parent="MarginContainer/VBoxContainer/BestScoreContainer"]
 layout_mode = 2
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 28
-text = "High Score"
+text = "Best Score"
 
-[node name="HighScore" type="Label" parent="MarginContainer/VBoxContainer/HighScoreContainer"]
+[node name="BestScore" type="Label" parent="MarginContainer/VBoxContainer/BestScoreContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
