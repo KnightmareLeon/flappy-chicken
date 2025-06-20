@@ -15,6 +15,9 @@ public partial class Game : Node2D
 
     [Signal]
     public delegate void UpdateScoreEventHandler(int score);
+    [Signal]
+    public delegate void SendScoreEventHandler(int score);
+
     public override void _Ready()
     {
         _chicken = (Chicken)GetNode<CharacterBody2D>("Chicken");
@@ -48,10 +51,10 @@ public partial class Game : Node2D
         scorer.Position = position;
         pipe.Scale = scale;
 
-        _ground.BodyEntered += pipe.ChickenHitGround;
-        _ground.BodyEntered += scorer.ChickenHitGround;
-        pipe.BodyEntered += _chicken.OnHittingPipe;
-        scorer.BodyEntered += _chicken.OnEnteringScorer;
+        _ground.Connect("body_entered", new Callable(pipe, nameof(pipe.ChickenHitGround)));
+        _ground.Connect("body_entered", new Callable(scorer, nameof(scorer.ChickenHitGround)));
+        pipe.Connect("body_entered", new Callable(_chicken, nameof(_chicken.OnHittingPipe)));
+        scorer.Connect("body_entered", new Callable(_chicken, nameof(_chicken.OnEnteringScorer)));
 
         AddChild(pipe);
         MoveChild(pipe, 1);
@@ -66,8 +69,8 @@ public partial class Game : Node2D
         Score score = (Score)scoreScene.Instantiate();
         score.Text = Score.ToString();
 
-        UpdateScore += score.OnUpdateScore;
-        _ground.BodyEntered += score.ChickenHitGround;
+        Connect(nameof(UpdateScore), new Callable(score, nameof(score.OnUpdateScore)));
+        _ground.Connect("body_entered", new Callable(score, nameof(score.ChickenHitGround)));
 
         AddChild(score);
     }
@@ -78,6 +81,7 @@ public partial class Game : Node2D
 
         DefeatPanel defeatPanel = (DefeatPanel)defeatPanelScene.Instantiate();
 
+        Connect(nameof(SendScore), new Callable(defeatPanel, nameof(defeatPanel.GetScore)));
         AddChild(defeatPanel);
     }
 
@@ -90,5 +94,4 @@ public partial class Game : Node2D
     {
         _stateMachine.ProcessSignal("OnChickenScoring");
     }
-
 }

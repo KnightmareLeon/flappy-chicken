@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bq52yl4cl00pj"]
+[gd_scene load_steps=4 format=3 uid="uid://bq52yl4cl00pj"]
 
 [ext_resource type="Script" uid="uid://b2r18btth2gxf" path="res://scripts/defeat_panel/DefeatPanel.cs" id="1_o30fg"]
 
@@ -14,9 +14,11 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+shadow_size = 6
 
-[node name="DefeatPanel" type="PanelContainer"]
-anchors_preset = -1
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o30fg"]
+
+[node name="DefeatPanel" type="PanelContainer" node_paths=PackedStringArray("_score")]
 offset_left = 32.0
 offset_top = 93.0
 offset_right = 487.0
@@ -24,17 +26,36 @@ offset_bottom = 636.0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_be1gs")
 script = ExtResource("1_o30fg")
+_score = NodePath("MarginContainer/VBoxContainer/ScoreContainer/Score")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
 theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 100
+theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 alignment = 1
+
+[node name="PressEnterToPlayAgain" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 28
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 23
+theme_override_styles/separator = SubResource("StyleBoxEmpty_o30fg")
 
 [node name="HighScoreContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -70,7 +91,7 @@ theme_override_font_sizes/font_size = 28
 text = "xxx"
 horizontal_alignment = 2
 
-[node name="PressEnterToPlayAgain" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="PressEnterToPlayAgain2" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
