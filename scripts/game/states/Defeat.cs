@@ -8,7 +8,7 @@ public partial class Defeat : State
     public override void Enter()
     {
         game = (Game)Parent;
-        game.LoadDefeatPanel();
+        game.ShowDefeatPanel();
         game.EmitSignal(nameof(game.SendScore), game.Score);
     }
     public override State ProcessInput(InputEvent inputEvent)

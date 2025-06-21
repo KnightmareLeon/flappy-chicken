@@ -1,16 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://tpjctxnxll0w"]
+[gd_scene load_steps=6 format=3 uid="uid://tpjctxnxll0w"]
 
 [ext_resource type="Script" uid="uid://bqojetw8p123w" path="res://scripts/score/Score.cs" id="1_lew60"]
 [ext_resource type="Script" uid="uid://4n71cb07o423" path="res://scripts/StateMachine.cs" id="2_68bkv"]
 [ext_resource type="Script" uid="uid://m1831pmc5kam" path="res://scripts/score/states/Tallying.cs" id="3_xcjqx"]
 [ext_resource type="Script" uid="uid://c4hnu5b3xoxqu" path="res://scripts/score/states/Stopped.cs" id="4_3eqfp"]
+[ext_resource type="Script" uid="uid://dw4uy5bnspiwr" path="res://scripts/score/states/Start.cs" id="5_68bkv"]
 
-[node name="Label" type="Label" node_paths=PackedStringArray("_stateMachine")]
+[node name="Score" type="Label" node_paths=PackedStringArray("_stateMachine")]
 offset_right = 512.0
 offset_bottom = 77.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 9
 theme_override_font_sizes/font_size = 30
+text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("1_lew60")
@@ -18,14 +20,20 @@ _stateMachine = NodePath("StateMachine")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("StartingState")]
 script = ExtResource("2_68bkv")
-StartingState = NodePath("Tallying")
+StartingState = NodePath("Start")
 metadata/_custom_type_script = "uid://4n71cb07o423"
+
+[node name="Start" type="Node" parent="StateMachine" node_paths=PackedStringArray("_tallyingState")]
+script = ExtResource("5_68bkv")
+_tallyingState = NodePath("../Tallying")
+metadata/_custom_type_script = "uid://ckn8m4mhf8xhv"
 
 [node name="Tallying" type="Node" parent="StateMachine" node_paths=PackedStringArray("_stoppedState")]
 script = ExtResource("3_xcjqx")
 _stoppedState = NodePath("../Stopped")
 metadata/_custom_type_script = "uid://ckn8m4mhf8xhv"
 
-[node name="Stopped" type="Node" parent="StateMachine"]
+[node name="Stopped" type="Node" parent="StateMachine" node_paths=PackedStringArray("_startState")]
 script = ExtResource("4_3eqfp")
+_startState = NodePath("../Start")
 metadata/_custom_type_script = "uid://ckn8m4mhf8xhv"

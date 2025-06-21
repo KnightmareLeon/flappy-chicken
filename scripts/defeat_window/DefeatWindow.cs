@@ -1,6 +1,6 @@
 namespace Godot.Game.FlappyChicken;
 
-public partial class DefeatPanel : PanelContainer
+public partial class DefeatWindow : PanelContainer
 {
     [Export]
     private Label _score;
@@ -17,7 +17,7 @@ public partial class DefeatPanel : PanelContainer
     {
         if (Input.IsActionJustPressed("start"))
         {
-            QueueFree();
+            Visible = false;
         }
     }
 

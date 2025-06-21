@@ -1,19 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://cbbs86sli3lp1"]
+[gd_scene load_steps=11 format=3 uid="uid://cbbs86sli3lp1"]
 
 [ext_resource type="Script" uid="uid://cubtr2tgmkmnk" path="res://scripts/game/Game.cs" id="1_p57ef"]
 [ext_resource type="PackedScene" uid="uid://ca43o2wjsp5ir" path="res://scenes/chicken.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://c0dr2hmxyfrgm" path="res://assets/pics/bg.png" id="2_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://cl4brflb83e4f" path="res://scenes/ground.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://bq52yl4cl00pj" path="res://scenes/defeat_window.tscn" id="5_0tnpc"]
 [ext_resource type="Script" uid="uid://4n71cb07o423" path="res://scripts/StateMachine.cs" id="5_u5sy4"]
 [ext_resource type="Script" uid="uid://bkbq6yurtf6nd" path="res://scripts/game/states/Start.cs" id="6_gee14"]
+[ext_resource type="PackedScene" uid="uid://tpjctxnxll0w" path="res://scenes/score.tscn" id="6_vtaks"]
 [ext_resource type="Script" uid="uid://ccp46x8ok8nhw" path="res://scripts/game/states/Playing.cs" id="7_gee14"]
 [ext_resource type="Script" uid="uid://cakanl3y523gh" path="res://scripts/game/states/Defeat.cs" id="8_0tnpc"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("_stateMachine")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_stateMachine", "_chicken", "_ground", "_defeatWindow")]
 script = ExtResource("1_p57ef")
 PipeGenerationStart = 0
 PipeGenerationInterval = 100
 _stateMachine = NodePath("StateMachine")
+_chicken = NodePath("Chicken")
+_ground = NodePath("Ground")
+_defeatWindow = NodePath("DefeatWindow")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(256, 384)
@@ -26,6 +31,13 @@ scale = Vector2(1.5, 1.5)
 
 [node name="Ground" parent="." instance=ExtResource("3_lnu2h")]
 position = Vector2(272, 768)
+
+[node name="DefeatWindow" parent="." instance=ExtResource("5_0tnpc")]
+visible = false
+
+[node name="Score" parent="." instance=ExtResource("6_vtaks")]
+offset_left = 3.0
+offset_right = 515.0
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("StartingState")]
 script = ExtResource("5_u5sy4")
@@ -44,5 +56,9 @@ _defeatState = NodePath("../Defeat")
 script = ExtResource("8_0tnpc")
 _startState = NodePath("../Start")
 
+[connection signal="SendScore" from="." to="DefeatWindow" method="GetScore"]
+[connection signal="UpdateScore" from="." to="Score" method="OnUpdateScore"]
 [connection signal="ChickenScored" from="Chicken" to="." method="OnChickenScoring"]
 [connection signal="body_entered" from="Ground" to="." method="ChickenHitGround"]
+[connection signal="body_entered" from="Ground" to="Chicken" method="OnHittingGround"]
+[connection signal="body_entered" from="Ground" to="Score" method="ChickenHitGround"]

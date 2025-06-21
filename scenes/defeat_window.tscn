@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bq52yl4cl00pj"]
 
-[ext_resource type="Script" uid="uid://b2r18btth2gxf" path="res://scripts/defeat_panel/DefeatPanel.cs" id="1_o30fg"]
+[ext_resource type="Script" uid="uid://bqma0wy8m0o0l" path="res://scripts/defeat_window/DefeatWindow.cs" id="1_7u5mc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_be1gs"]
 bg_color = Color(0.826267, 0.520041, 0.179972, 1)
@@ -18,14 +18,14 @@ shadow_size = 6
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o30fg"]
 
-[node name="DefeatPanel" type="PanelContainer" node_paths=PackedStringArray("_score", "_bestScoreLabel")]
+[node name="DefeatWindow" type="PanelContainer" node_paths=PackedStringArray("_score", "_bestScoreLabel")]
 offset_left = 32.0
 offset_top = 93.0
 offset_right = 487.0
 offset_bottom = 636.0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_be1gs")
-script = ExtResource("1_o30fg")
+script = ExtResource("1_7u5mc")
 _score = NodePath("MarginContainer/VBoxContainer/ScoreContainer/Score")
 _bestScoreLabel = NodePath("MarginContainer/VBoxContainer/BestScoreContainer/BestScore")
 

@@ -9,9 +9,12 @@ public partial class Game : Node2D
     public int Score { get; set; } = 0;
     [Export]
     private StateMachine _stateMachine;
+    [Export]
     private Chicken _chicken;
-
+    [Export]
     private Ground _ground;
+    [Export]
+    private DefeatWindow _defeatWindow;
 
     [Signal]
     public delegate void UpdateScoreEventHandler(int score);
@@ -20,9 +23,7 @@ public partial class Game : Node2D
 
     public override void _Ready()
     {
-        _chicken = (Chicken)GetNode<CharacterBody2D>("Chicken");
-        _ground = (Ground)GetNode<Area2D>("Ground");
-        _ground.BodyEntered += _chicken.OnHittingGround;
+        _defeatWindow.Visible = false;
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -62,27 +63,9 @@ public partial class Game : Node2D
         MoveChild(scorer, 1);
     }
 
-    public void AddScoreLabel()
+    public void ShowDefeatPanel()
     {
-        PackedScene scoreScene = GD.Load<PackedScene>("res://scenes/score.tscn");
-
-        Score score = (Score)scoreScene.Instantiate();
-        score.Text = Score.ToString();
-
-        Connect(nameof(UpdateScore), new Callable(score, nameof(score.OnUpdateScore)));
-        _ground.Connect("body_entered", new Callable(score, nameof(score.ChickenHitGround)));
-
-        AddChild(score);
-    }
-
-    public void LoadDefeatPanel()
-    {
-        PackedScene defeatPanelScene = GD.Load<PackedScene>("res://scenes/defeat_panel.tscn");
-
-        DefeatPanel defeatPanel = (DefeatPanel)defeatPanelScene.Instantiate();
-
-        Connect(nameof(SendScore), new Callable(defeatPanel, nameof(defeatPanel.GetScore)));
-        AddChild(defeatPanel);
+        _defeatWindow.Visible = true;
     }
 
     private void ChickenHitGround(Node2D body)

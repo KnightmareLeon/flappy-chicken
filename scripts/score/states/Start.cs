@@ -1,21 +1,21 @@
-namespace Godot.Game.FlappyChicken;
+namespace Godot.Game.FlappyChicken.ScoreStates;
 
-public partial class Stopped : State
+public partial class Start : State
 {
     private Score _score;
     [Export]
-    private State _startState;
+    private State _tallyingState;
     public override void Enter()
     {
         _score = (Score)Parent;
         _score.Visible = false;
-        _score.Text = "0";
     }
-    public override State ProcessInput(InputEvent inputEvent)
+
+        public override State ProcessInput(InputEvent inputEvent)
     {
         if (Input.IsActionJustPressed("start"))
         {
-            return _startState; 
+            return _tallyingState;
         }
         return null;
     }

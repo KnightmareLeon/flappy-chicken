@@ -10,7 +10,6 @@ public partial class Playing : State
     public override void Enter()
     {
         game = (Game)Parent;
-        game.AddScoreLabel();
     }
 
     public override State ProcessFrame(double delta)

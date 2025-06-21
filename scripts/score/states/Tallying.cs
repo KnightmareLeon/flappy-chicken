@@ -8,6 +8,7 @@ public partial class Tallying : State
     public override void Enter()
     {
         _score = (Score)Parent;
+        _score.Visible = true;
     }
 
     public override State ProcessSignal(string signalName, params Variant[] args)
