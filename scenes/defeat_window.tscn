@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bq52yl4cl00pj"]
+[gd_scene load_steps=6 format=3 uid="uid://bq52yl4cl00pj"]
 
 [ext_resource type="Script" uid="uid://bqma0wy8m0o0l" path="res://scripts/defeat_window/DefeatWindow.cs" id="1_7u5mc"]
 
@@ -16,7 +16,22 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 shadow_size = 6
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o30fg"]
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_7u5mc"]
+thickness = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w301k"]
+bg_color = Color(0.827451, 0.521569, 0.180392, 1)
+border_width_left = 8
+border_width_bottom = 9
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rnrms"]
 
 [node name="DefeatWindow" type="PanelContainer" node_paths=PackedStringArray("_score", "_bestScoreLabel")]
 offset_left = 32.0
@@ -26,15 +41,15 @@ offset_bottom = 636.0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_be1gs")
 script = ExtResource("1_7u5mc")
-_score = NodePath("MarginContainer/VBoxContainer/ScoreContainer/Score")
-_bestScoreLabel = NodePath("MarginContainer/VBoxContainer/BestScoreContainer/BestScore")
+_score = NodePath("MarginContainer/VBoxContainer/ScoreContainer/MarginContainer/VBoxContainer/Score")
+_bestScoreLabel = NodePath("MarginContainer/VBoxContainer/BestScoreContainer/MarginContainer/VBoxContainer/BestScore")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 45
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 45
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -47,7 +62,7 @@ size_flags_vertical = 8
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_constants/shadow_outline_size = 0
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 36
 text = "GAME OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -56,41 +71,62 @@ clip_text = true
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 23
-theme_override_styles/separator = SubResource("StyleBoxEmpty_o30fg")
+theme_override_styles/separator = SubResource("StyleBoxLine_7u5mc")
 
-[node name="BestScoreContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="BestScoreContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w301k")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/BestScoreContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/BestScoreContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="BestScoreLabel" type="Label" parent="MarginContainer/VBoxContainer/BestScoreContainer"]
+[node name="BestScoreLabel" type="Label" parent="MarginContainer/VBoxContainer/BestScoreContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 34
 text = "Best Score"
 
-[node name="BestScore" type="Label" parent="MarginContainer/VBoxContainer/BestScoreContainer"]
+[node name="BestScore" type="Label" parent="MarginContainer/VBoxContainer/BestScoreContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 28
 text = "XXX"
-horizontal_alignment = 2
 
-[node name="ScoreContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 23
+theme_override_styles/separator = SubResource("StyleBoxEmpty_rnrms")
+
+[node name="ScoreContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w301k")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScoreContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScoreContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="ScoreLabel" type="Label" parent="MarginContainer/VBoxContainer/ScoreContainer"]
+[node name="ScoreLabel" type="Label" parent="MarginContainer/VBoxContainer/ScoreContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 36
 text = "Score"
 
-[node name="Score" type="Label" parent="MarginContainer/VBoxContainer/ScoreContainer"]
+[node name="Score" type="Label" parent="MarginContainer/VBoxContainer/ScoreContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 28
 text = "xxx"
-horizontal_alignment = 2
 
 [node name="PressEnterToPlayAgain2" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
