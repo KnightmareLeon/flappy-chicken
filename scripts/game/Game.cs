@@ -66,6 +66,7 @@ public partial class Game : Node2D
     public void ShowDefeatPanel()
     {
         _defeatWindow.Visible = true;
+        _defeatWindow.Enter();
     }
 
     private void ChickenHitGround(Node2D body)

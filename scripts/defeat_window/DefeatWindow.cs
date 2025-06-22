@@ -6,6 +6,8 @@ public partial class DefeatWindow : PanelContainer
     private Label _score;
     [Export]
     private Label _bestScoreLabel;
+    [Export]
+    private DefeatWindowAnimationPlayer _animationPlayer;
     private BestScore _bestScoreResource;
 
     public override void _Ready()
@@ -31,6 +33,11 @@ public partial class DefeatWindow : PanelContainer
         }
         _bestScoreLabel.Text = _bestScoreResource.SavedBestScore.ToString();
 
+    }
+
+    public void Enter()
+    {
+        _animationPlayer.DefeatPanelEnter();
     }
 
 }
