@@ -15,6 +15,10 @@ public partial class Game : Node2D
     private Ground _ground;
     [Export]
     private DefeatWindow _defeatWindow;
+    [Export]
+    private Label _title;
+    [Export]
+    private Label _pressEnter;
 
     [Signal]
     public delegate void UpdateScoreEventHandler(int score);
@@ -67,6 +71,18 @@ public partial class Game : Node2D
     {
         _defeatWindow.Visible = true;
         _defeatWindow.Enter();
+    }
+
+    public void HideStartLabels()
+    {
+        _title.Visible = false;
+        _pressEnter.Visible = false;
+    }
+
+    public void ShowStartLabels()
+    {
+        _title.Visible = true;
+        _pressEnter.Visible = true;
     }
 
     private void ChickenHitGround(Node2D body)

@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://ccp46x8ok8nhw" path="res://scripts/game/states/Playing.cs" id="7_gee14"]
 [ext_resource type="Script" uid="uid://cakanl3y523gh" path="res://scripts/game/states/Defeat.cs" id="8_0tnpc"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("_stateMachine", "_chicken", "_ground", "_defeatWindow")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_stateMachine", "_chicken", "_ground", "_defeatWindow", "_title", "_pressEnter")]
 script = ExtResource("1_p57ef")
 PipeGenerationStart = 0
 PipeGenerationInterval = 100
@@ -19,6 +19,8 @@ _stateMachine = NodePath("StateMachine")
 _chicken = NodePath("Chicken")
 _ground = NodePath("Ground")
 _defeatWindow = NodePath("DefeatWindow")
+_title = NodePath("TitleLabel")
+_pressEnter = NodePath("PressEnterToPlay")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(256, 384)
@@ -39,6 +41,30 @@ visible = false
 visible = false
 offset_left = 3.0
 offset_right = 515.0
+
+[node name="TitleLabel" type="Label" parent="."]
+offset_left = 70.0
+offset_top = 102.0
+offset_right = 442.0
+offset_bottom = 285.0
+pivot_offset = Vector2(186, 0)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 70
+text = "FLAPPY
+CHICKEN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PressEnterToPlay" type="Label" parent="."]
+offset_left = 122.0
+offset_top = 481.0
+offset_right = 390.0
+offset_bottom = 507.0
+theme_override_colors/font_color = Color(4.04298e-06, 0.78488, 0.925532, 1)
+theme_override_font_sizes/font_size = 20
+text = "PRESS ENTER TO PLAY"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("StartingState")]
 script = ExtResource("5_u5sy4")
