@@ -16,7 +16,7 @@ public partial class Flapping : ChickenState
 
     public override State ProcessInput(InputEvent inputEvent)
     {
-        if (Input.IsActionJustPressed("flap"))
+        if (Input.IsActionJustPressed("flap") && Chicken.Position.Y >= -63)
         {
             Chicken.FlapTimer = 10;
         }
