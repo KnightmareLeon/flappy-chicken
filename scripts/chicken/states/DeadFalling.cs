@@ -24,6 +24,7 @@ public partial class DeadFalling : ChickenState
     {
         if (signalName == "OnHittingGround")
         {
+            Chicken.PlaySoundEffect("res://assets/sounds/die.wav");
             return _deadState;
         }
         return null;

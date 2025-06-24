@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_2jvrp")
-SavedBestScore = 9
+SavedBestScore = 11
