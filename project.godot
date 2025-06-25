@@ -34,6 +34,10 @@ window/handheld/orientation=1
 
 project/assembly_name="Flappy Chicken"
 
+[editor]
+
+movie_writer/movie_file="C:/Users/H0me/OneDrive/Documents/GitHub/flappy-chicken/preview.avi"
+
 [gui]
 
 theme/custom_font="uid://cojia0eiq464"
