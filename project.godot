@@ -13,7 +13,7 @@ config_version=5
 config/name="Flappy Chicken"
 run/main_scene="uid://cbbs86sli3lp1"
 config/features=PackedStringArray("4.4", "C#", "Mobile")
-config/icon="res://icon.svg"
+config/icon="uid://cmn5o0efac2p3"
 
 [audio]
 
