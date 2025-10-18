@@ -14,3 +14,6 @@ https://github.com/user-attachments/assets/9e38ae46-1922-4f92-8d26-9a43e1094fbd
 - To vmiinv for the chicken spritesheets downloaded from https://vmiinv.itch.io/chickenpack-asset.
 - To Megacrash for the tilesets and background image from the custom Flappy Bird Package downloaded from https://megacrash.itch.io/flappy-bird-assets.
 - Sound effects are downloaded from https://www.101soundboards.com/boards/10178-flappy-bird-sounds.
+
+
+Project Status: Technically complete but have plans for more updates in the future.
